@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="SetNuspecProperties" BeforeTargets="GenerateNuspec">
+
+    <PropertyGroup>
+
+      <NuspecProperties>$(NuspecProperties);id=$(AssemblyName)</NuspecProperties>
+
+      <NuspecProperties>$(NuspecProperties);config=$(Configuration)</NuspecProperties>
+
+      <NuspecProperties>$(NuspecProperties);version=$(VersionPrefix)</NuspecProperties>
+
+      <NuspecProperties>$(NuspecProperties);description=$(Description)</NuspecProperties>
+
+      <NuspecProperties>$(NuspecProperties);authors=$(Authors)</NuspecProperties>
+      <NuspecProperties>$(NuspecProperties);licenseUrl=$(PackageLicenseUrl)</NuspecProperties>
+      <NuspecProperties>$(NuspecProperties);projectUrl=$(PackageProjectUrl)</NuspecProperties>
+      <NuspecProperties>$(NuspecProperties);repositoryUrl=$(RepositoryURL)</NuspecProperties>
+      <NuspecProperties>$(NuspecProperties);tags=$(PackageTags)</NuspecProperties>
+      <NuspecProperties>$(NuspecProperties);copyright=$(Copyright)</NuspecProperties>
+      <NuspecProperties>$(NuspecProperties);projectRootFolder=$(MSBuildProjectDirectory)</NuspecProperties>
+
+    </PropertyGroup>
+
+    <Message Importance="high" Text="NuspecProperties: $(NuspecProperties)" />
+
+  </Target>
+</Project>
