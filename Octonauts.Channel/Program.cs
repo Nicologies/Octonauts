@@ -1,47 +1,25 @@
 using System;
 using System.Threading.Tasks;
 using coreArgs;
-using coreArgs.Attributes;
 using Nicologies.Octonauts.Core;
 using Nicologies.Octonauts.Core.OctopusClient;
 using Octopus.Client.Exceptions;
 
 namespace Nicologies.Octonauts.Channel
 {
-    internal class Options: BaseOptions
-    {
-        [Option("project-group", "create channel for all projects in this project group",
-            required: false)]
-        public string ProjectGroup { get; set; }
-
-        [Option("delete", "delete channel instead of create",
-            required: false)]
-        public bool DeleteChannel { get; set; } = false;
-
-        [Option("lifecycle", "life cycle of the channel, default if not specified",
-            required: false)]
-        public string LifeCycle { get; set; }
-    }
-
     internal class Program
     {
         public static async Task Main(string[] args)
         {
-            var options = ArgsParser.Parse<Options>(args);
+            var options = ArgsParser.Parse<ChannelParams>(args);
             if (options.Errors.Count > 0)
             {
-                Console.Write(ArgsParser.GetHelpText<Options>());
+                Console.Write(ArgsParser.GetHelpText<ChannelParams>());
                 Environment.Exit(-1);
                 return;
             }
-
-            var channelParams = CommonParamsBuilder.GetCommonParams<ChannelParams>(options.Arguments);
-            if (!string.IsNullOrWhiteSpace(options.Arguments.ProjectGroup))
-            {
-                channelParams.ProjectGroup = options.Arguments.ProjectGroup.Trim();
-            }
-            channelParams.DeleteChannel = options.Arguments.DeleteChannel;
-            channelParams.LifeCycle = options.Arguments.LifeCycle;
+            var channelParams = options.Arguments;
+            OctopusParamsBuilder.FillOctopusParams(channelParams);
             await CreateChannel(channelParams);
         }
 

@@ -4,22 +4,9 @@ namespace Nicologies.Octonauts.Core
 {
     public static class OctopusParamsBuilder
     {
-        public static void FillOctopusParams(OctopusParams octopusParams, BaseOptions cmdArgs)
+        public static void FillOctopusParams(OctopusParams octopusParams)
         {
-            FillOctopusParamsFromCommandLineArgs(octopusParams, cmdArgs);
             FillOctopusParamsFromEnv(octopusParams);
-        }
-
-        private static void FillOctopusParamsFromCommandLineArgs(OctopusParams octopusParams, BaseOptions cmdArgs)
-        {
-            if (!string.IsNullOrWhiteSpace(cmdArgs.ApiKey))
-            {
-                octopusParams.ApiKey = cmdArgs.ApiKey;
-            }
-            if (!string.IsNullOrWhiteSpace(cmdArgs.ServerUrl))
-            {
-                octopusParams.ServerUrl = cmdArgs.ServerUrl;
-            }
         }
 
         private static void FillOctopusParamsFromEnv(OctopusParams octopusParams)

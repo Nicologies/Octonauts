@@ -5,11 +5,18 @@
     <AssemblyName>Nicologies.Octonauts.Core</AssemblyName>
     <RootNamespace>Nicologies.Octonauts.Core</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="nuget_packages\**" />
+    <Compile Remove="publish\**" />
+    <EmbeddedResource Remove="nuget_packages\**" />
+    <EmbeddedResource Remove="publish\**" />
+    <None Remove="nuget_packages\**" />
+    <None Remove="publish\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="coreArgs" Version="1.0.0" />
     <PackageReference Include="Octopus.Client" Version="4.24.4" />
-    <PackageReference Include="YamlDotNet.NetStandard" Version="4.0.0" />
   </ItemGroup>
 
 </Project>
