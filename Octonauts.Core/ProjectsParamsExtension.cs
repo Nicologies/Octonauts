@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Octopus.Client;
 
-namespace Nicologies.Octonauts.Core
+namespace Octonauts.Core
 {
     public static class ProjectsParamsExtension
     {

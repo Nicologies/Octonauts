@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Octopus.Client;
 
-namespace Nicologies.Octonauts.Core.OctopusClient
+namespace Octonauts.Core.OctopusClient
 {
     public static class OctopusClientProvider
     {

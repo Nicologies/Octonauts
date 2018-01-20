@@ -1,7 +1,7 @@
 using coreArgs.Attributes;
-using Nicologies.Octonauts.Core;
+using Octonauts.Core;
 
-namespace Nicologies.Octonauts.Channel
+namespace Octonauts.Channel
 {
     public class ChannelParams: CommonParams
     {

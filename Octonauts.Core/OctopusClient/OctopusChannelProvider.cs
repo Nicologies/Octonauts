@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Octopus.Client;
 using Octopus.Client.Model;
 
-namespace Nicologies.Octonauts.Core.OctopusClient
+namespace Octonauts.Core.OctopusClient
 {
     public static class OctopusChannelProvider
     {

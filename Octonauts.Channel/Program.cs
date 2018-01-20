@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
 using coreArgs;
-using Nicologies.Octonauts.Core;
-using Nicologies.Octonauts.Core.OctopusClient;
+using Octonauts.Core;
+using Octonauts.Core.OctopusClient;
 using Octopus.Client.Exceptions;
 
-namespace Nicologies.Octonauts.Channel
+namespace Octonauts.Channel
 {
     internal class Program
     {

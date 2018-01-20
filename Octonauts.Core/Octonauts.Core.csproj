@@ -2,8 +2,8 @@
   <Import Project="../Version.targets" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Nicologies.Octonauts.Core</AssemblyName>
-    <RootNamespace>Nicologies.Octonauts.Core</RootNamespace>
+    <AssemblyName>Octonauts.Core</AssemblyName>
+    <RootNamespace>Octonauts.Core</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="nuget_packages\**" />

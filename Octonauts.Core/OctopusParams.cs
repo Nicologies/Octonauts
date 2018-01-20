@@ -1,6 +1,6 @@
 using coreArgs.Attributes;
 
-namespace Nicologies.Octonauts.Core
+namespace Octonauts.Core
 {
     public class OctopusParams
     {

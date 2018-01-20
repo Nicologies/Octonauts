@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using Nicologies.Octonauts.Core;
-using Nicologies.Octonauts.Core.OctopusClient;
+using Octonauts.Core;
+using Octonauts.Core.OctopusClient;
 using Octopus.Client;
 using Octopus.Client.Exceptions;
 using Octopus.Client.Model;
 
-namespace Nicologies.Octonauts.Release
+namespace Octonauts.Release
 {
     internal static class ReleaseCreator
     {

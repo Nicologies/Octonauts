@@ -4,16 +4,16 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>Nicologies.Octonauts.Release</AssemblyName>
-    <RootNamespace>Nicologies.Octonauts.Release</RootNamespace>
+    <AssemblyName>Octonauts.Release</AssemblyName>
+    <RootNamespace>Octonauts.Release</RootNamespace>
     <NuspecFile>../template.nuspec</NuspecFile>
     <Authors>Nicologies</Authors>
     <Company>Nicologies</Company>
     <Description>Utility to manipulate Octopus releases</Description>
-    <PackageLicenseUrl>https://github.com/Nicologies/Octonauts/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/Nicologies/octonauts</PackageLicenseUrl>
     <Copyright>Nicologies</Copyright>
-    <PackageProjectUrl>https://github.com/Nicologies/Octonauts</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Nicologies/Octonauts</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Nicologies/octonauts</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Nicologies/octonauts</RepositoryUrl>
     <PackageTags>OctopusDeploy</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

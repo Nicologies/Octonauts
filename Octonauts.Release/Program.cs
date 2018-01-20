@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using coreArgs;
-using Nicologies.Octonauts.Core;
+using Octonauts.Core;
 
-namespace Nicologies.Octonauts.Release
+namespace Octonauts.Release
 {
     internal class Program
     {

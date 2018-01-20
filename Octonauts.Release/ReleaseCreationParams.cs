@@ -1,7 +1,7 @@
 using coreArgs.Attributes;
-using Nicologies.Octonauts.Core;
+using Octonauts.Core;
 
-namespace Nicologies.Octonauts.Release
+namespace Octonauts.Release
 {
     public class ReleaseCreationParams : CommonParams
     {

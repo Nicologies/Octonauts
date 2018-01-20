@@ -1,6 +1,6 @@
 using System;
 
-namespace Nicologies.Octonauts.Core
+namespace Octonauts.Core
 {
     public static class OctopusParamsBuilder
     {

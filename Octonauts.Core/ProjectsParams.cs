@@ -1,7 +1,7 @@
 using coreArgs.Attributes;
 using System.Collections.Generic;
 
-namespace Nicologies.Octonauts.Core
+namespace Octonauts.Core
 {
     public class ProjectsParams : OctopusParams
     {
