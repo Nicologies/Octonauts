@@ -14,7 +14,7 @@ namespace Octonauts.Release
         {
             using (var client = await OctopusClientProvider.GetOctopusClient(releaseCreationParams))
             {
-                foreach (var project in releaseCreationParams.GetEffectiveProjects(client))
+                foreach (var project in await releaseCreationParams.GetEffectiveProjects(client))
                 {
                     await CreateRelease(project, releaseCreationParams, client);
                 }
@@ -74,12 +74,11 @@ namespace Octonauts.Release
             }
         }
 
-
         public static async Task PromoteToChannel(ReleaseCreationParams releaseCreationParams)
         {
             using (var client = await OctopusClientProvider.GetOctopusClient(releaseCreationParams))
             {
-                foreach (var projectStr in releaseCreationParams.GetEffectiveProjects(client))
+                foreach (var projectStr in await releaseCreationParams.GetEffectiveProjects(client))
                 {
                     var project = await client.Repository.Projects.FindByName(projectStr);
                     if (project == null)

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Octonauts.Packages": {
+      "commandName": "Project",
+      "commandLineArgs": "--project-group \"ECS Version 7 Software Group - DevTest\""
+    }
+  }
+}

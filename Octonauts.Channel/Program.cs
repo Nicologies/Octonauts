@@ -27,7 +27,7 @@ namespace Octonauts.Channel
         {
             using (var client = await OctopusClientProvider.GetOctopusClient(channelParams))
             {
-                foreach (var projectStr in channelParams.GetEffectiveProjects(client))
+                foreach (var projectStr in await channelParams.GetEffectiveProjects(client))
                 {
                     var project = await client.Repository.Projects.FindByName(projectStr);
                     var channel = await client.GetChannelResource(project, channelParams.Channel);
