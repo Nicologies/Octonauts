@@ -10,22 +10,22 @@ namespace Octonauts.Release
 {
     internal static class ReleaseCreator
     {
-        public static async Task CreateRelease(ReleaseCreationParams releaseCreationParams)
+        public static async Task CreateRelease(ReleaseParams releaseParams)
         {
-            using (var client = await OctopusClientProvider.GetOctopusClient(releaseCreationParams))
+            using (var client = await OctopusClientProvider.GetOctopusClient(releaseParams))
             {
-                foreach (var project in await releaseCreationParams.GetEffectiveProjects(client))
+                foreach (var project in await releaseParams.GetEffectiveProjects(client))
                 {
-                    await CreateRelease(project, releaseCreationParams, client);
+                    await CreateRelease(project, releaseParams, client);
                 }
             }
         }
 
         private static async Task CreateRelease(string projectName, 
-            ReleaseCreationParams releaseCreationParams, IOctopusAsyncClient octo)
+            ReleaseParams releaseParams, IOctopusAsyncClient octo)
         {
             var project = await octo.Repository.Projects.FindByName(projectName);
-            var channel = await octo.GetChannelResource(project, releaseCreationParams.Channel);
+            var channel = await octo.GetChannelResource(project, releaseParams.Channel);
             if (channel == null)
             {
                 Console.WriteLine($"Skipped as no such channel for {projectName}");
@@ -35,7 +35,7 @@ namespace Octonauts.Release
             {
                 ChannelId = channel.Id,
                 ProjectId = project.Id,
-                Version = releaseCreationParams.GetEffectiveReleaseName()
+                Version = releaseParams.GetEffectiveReleaseName()
             };
             var process = await octo.Repository.DeploymentProcesses.Get(project.DeploymentProcessId);
             var template = await octo.Repository.DeploymentProcesses.GetTemplate(process, channel);
@@ -44,7 +44,7 @@ namespace Octonauts.Release
                 var selectedPackage = new SelectedPackage
                 {
                     StepName = package.StepName,
-                    Version = releaseCreationParams.Version
+                    Version = releaseParams.Version
                 };
                 releaseResource.SelectedPackages.Add(selectedPackage);
             }
@@ -58,7 +58,7 @@ namespace Octonauts.Release
                     .Contains("Please use a different version, or look at using a mask to auto-increment the number"))
                 {
                     Console.WriteLine(
-                        $"Skipped creating release as version {releaseCreationParams.GetEffectiveReleaseName()} for {project.Name} already exists.");
+                        $"Skipped creating release as version {releaseParams.GetEffectiveReleaseName()} for {project.Name} already exists.");
                 }
                 else
                 {
@@ -74,11 +74,11 @@ namespace Octonauts.Release
             }
         }
 
-        public static async Task PromoteToChannel(ReleaseCreationParams releaseCreationParams)
+        public static async Task PromoteToChannel(ReleaseParams releaseParams)
         {
-            using (var client = await OctopusClientProvider.GetOctopusClient(releaseCreationParams))
+            using (var client = await OctopusClientProvider.GetOctopusClient(releaseParams))
             {
-                foreach (var projectStr in await releaseCreationParams.GetEffectiveProjects(client))
+                foreach (var projectStr in await releaseParams.GetEffectiveProjects(client))
                 {
                     var project = await client.Repository.Projects.FindByName(projectStr);
                     if (project == null)
@@ -87,7 +87,7 @@ namespace Octonauts.Release
                         continue;
                     }
                     
-                    var channel = await client.GetChannelResource(project, releaseCreationParams.Channel);
+                    var channel = await client.GetChannelResource(project, releaseParams.Channel);
                     if (channel == null)
                     {
                         Console.WriteLine($"Skipped {projectStr} as cannot find the channel for this project");
@@ -97,7 +97,7 @@ namespace Octonauts.Release
                     {
                         var release =
                             await client.Repository.Projects.GetReleaseByVersion(project,
-                                releaseCreationParams.GetEffectiveReleaseName());
+                                releaseParams.GetEffectiveReleaseName());
                         if (release == null)
                         {
                             Console.WriteLine($"Skipped {projectStr} as cannot find the release for this project");

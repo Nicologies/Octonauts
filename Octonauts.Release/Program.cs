@@ -9,10 +9,10 @@ namespace Octonauts.Release
     {
         public static void Main(string[] args)
         {
-            var options = ArgsParser.Parse<ReleaseCreationParams>(args);
+            var options = ArgsParser.Parse<ReleaseParams>(args);
             if (options.Errors.Count > 0)
             {
-                Console.Write(ArgsParser.GetHelpText<ReleaseCreationParams>());
+                Console.Write(ArgsParser.GetHelpText<ReleaseParams>());
                 Environment.Exit(-1);
                 return;
             }
@@ -20,7 +20,7 @@ namespace Octonauts.Release
             DispatchWork(options.Arguments).Wait();
         }
 
-        private static async Task DispatchWork(ReleaseCreationParams options)
+        private static async Task DispatchWork(ReleaseParams options)
         {
             if (options.CreateRelease)
             {
@@ -32,6 +32,12 @@ namespace Octonauts.Release
             {
                 OctopusParamsBuilder.FillOctopusParams(options);
                 await ReleaseCreator.PromoteToChannel(options);
+                return;
+            }
+            if (options.DeleteRelease)
+            {
+                OctopusParamsBuilder.FillOctopusParams(options);
+                await ReleaseDeleter.DeleteRelease(options);
                 return;
             }
         }
