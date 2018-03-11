@@ -22,22 +22,26 @@ namespace Octonauts.Release
 
         private static async Task DispatchWork(ReleaseParams options)
         {
+            OctopusParamsBuilder.FillOctopusParams(options);
             if (options.CreateRelease)
             {
-                OctopusParamsBuilder.FillOctopusParams(options);
                 await ReleaseCreator.CreateRelease(options);
                 return;
             }
             if (options.PromoteToChannel)
             {
-                OctopusParamsBuilder.FillOctopusParams(options);
                 await ReleaseCreator.PromoteToChannel(options);
                 return;
             }
             if (options.DeleteRelease)
             {
-                OctopusParamsBuilder.FillOctopusParams(options);
-                await ReleaseDeleter.DeleteRelease(options);
+                await ReleaseOperationExecutor.Execute(options, new DeleteReleaseOperation());
+                return;
+            }
+
+            if (options.UpdateReleaseVariables)
+            {
+                await ReleaseOperationExecutor.Execute(options, new UpdateReleaseVariablesOperation());
                 return;
             }
         }

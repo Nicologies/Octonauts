@@ -6,9 +6,9 @@ using Octopus.Client.Exceptions;
 
 namespace Octonauts.Release
 {
-    internal class ReleaseDeleter
+    internal static class ReleaseOperationExecutor
     {
-        public static async Task DeleteRelease(ReleaseParams options)
+        public static async Task Execute(ReleaseParams options, IReleaseOperation operation)
         {
             using (var client = await OctopusClientProvider.GetOctopusClient(options))
             {
@@ -31,7 +31,8 @@ namespace Octonauts.Release
                             Console.WriteLine($"Skipped {projectStr} as cannot find the release for this project");
                             continue;
                         }
-                        await client.Repository.Releases.Delete(release);
+
+                        await operation.Execute(client, options, release);
                     }
                     catch (OctopusResourceNotFoundException)
                     {
