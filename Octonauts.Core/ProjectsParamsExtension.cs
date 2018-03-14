@@ -23,7 +23,7 @@ namespace Octonauts.Core
                 ret.Add(prj);
             }
 
-            return ret.ToList();
+            return ret.Except(projectsParams.ExcludeProjects).ToList();
         }
     }
 }
