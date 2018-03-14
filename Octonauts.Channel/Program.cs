@@ -18,6 +18,7 @@ namespace Octonauts.Channel
                 Environment.Exit(-1);
                 return;
             }
+
             var channelParams = options.Arguments;
             OctopusParamsBuilder.FillOctopusParams(channelParams);
             await CreateChannel(channelParams);
@@ -38,6 +39,7 @@ namespace Octonauts.Channel
                             Console.WriteLine($"Skipped create channel {channelParams.Channel} as it already exists in project {project.Name}");
                             continue;
                         }
+
                         Console.WriteLine($"Creating channel {channelParams.Channel} in project {project.Name}");
                         var channelEditor = await client.Repository.Channels.CreateOrModify(project, channelParams.Channel);
                         if (!string.IsNullOrWhiteSpace(channelParams.LifeCycle))
@@ -55,6 +57,7 @@ namespace Octonauts.Channel
                             Console.WriteLine($"Skipped deleting channel {channelParams.Channel} as it doesn't exist in project {project.Name}");
                             continue;
                         }
+
                         Console.WriteLine($"Deleting channel {channelParams.Channel} from project {project.Name}");
                         try
                         {

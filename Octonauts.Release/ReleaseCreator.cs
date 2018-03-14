@@ -43,7 +43,7 @@ namespace Octonauts.Release
             {
                 var selectedPackage = new SelectedPackage
                 {
-                    StepName = package.StepName,
+                    ActionName = package.ActionName,
                     Version = releaseParams.Version
                 };
                 releaseResource.SelectedPackages.Add(selectedPackage);

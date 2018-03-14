@@ -11,7 +11,7 @@ namespace Octonauts.Packages
 {
     public class Program
     {
-        public async static Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var options = ArgsParser.Parse<ProjectsParams>(args);
             if (options.Errors.Count > 0)

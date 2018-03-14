@@ -8,13 +8,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51253A0B-5EC1-42CF-8973-9DA379A9DA99}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		stylecop.json = stylecop.json
+		stylecop.ruleset = stylecop.ruleset
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Octonauts.Channel", "Octonauts.Channel\Octonauts.Channel.csproj", "{67E67DF9-4349-4526-B1C3-CC70CB9348B3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Octonauts.Core", "Octonauts.Core\Octonauts.Core.csproj", "{A38C381F-9BFF-4076-9854-045BBAFFDA6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octonauts.Packages", "Octonauts.Packages\Octonauts.Packages.csproj", "{107F5D97-AEEE-45DC-9077-1AE84F59C9C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Octonauts.Packages", "Octonauts.Packages\Octonauts.Packages.csproj", "{107F5D97-AEEE-45DC-9077-1AE84F59C9C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
