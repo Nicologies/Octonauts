@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <LangVersion>7.2</LangVersion>
+    <LangVersion>Latest</LangVersion>
     <NoWarn>$(NoWarn);1573;1591;1712</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>../stylecop.ruleset</CodeAnalysisRuleSet>
