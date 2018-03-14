@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
-using Octopus.Client;
-using System.Threading.Tasks;
-
 namespace Octonauts.Core
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Octopus.Client;
+
     public static class ProjectsParamsExtension
     {
         public static async Task<List<string>> GetEffectiveProjects(this ProjectsParams projectsParams,

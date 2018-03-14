@@ -21,7 +21,7 @@ namespace Octonauts.Release
             }
         }
 
-        private static async Task CreateRelease(string projectName, 
+        private static async Task CreateRelease(string projectName,
             ReleaseParams releaseParams, IOctopusAsyncClient octo)
         {
             var project = await octo.Repository.Projects.FindByName(projectName);
@@ -31,6 +31,7 @@ namespace Octonauts.Release
                 Console.WriteLine($"Skipped as no such channel for {projectName}");
                 return;
             }
+
             var releaseResource = new ReleaseResource()
             {
                 ChannelId = channel.Id,
@@ -48,6 +49,7 @@ namespace Octonauts.Release
                 };
                 releaseResource.SelectedPackages.Add(selectedPackage);
             }
+
             try
             {
                 await octo.Repository.Releases.Create(releaseResource);
@@ -86,13 +88,14 @@ namespace Octonauts.Release
                         Console.WriteLine($"Skipped {projectStr} as cannot find this project");
                         continue;
                     }
-                    
+
                     var channel = await client.GetChannelResource(project, releaseParams.Channel);
                     if (channel == null)
                     {
                         Console.WriteLine($"Skipped {projectStr} as cannot find the channel for this project");
                         continue;
                     }
+
                     try
                     {
                         var release =
@@ -103,6 +106,7 @@ namespace Octonauts.Release
                             Console.WriteLine($"Skipped {projectStr} as cannot find the release for this project");
                             continue;
                         }
+
                         release.ChannelId = channel.Id;
                         await client.Repository.Releases.Modify(release);
                     }

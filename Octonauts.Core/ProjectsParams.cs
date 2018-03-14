@@ -1,8 +1,8 @@
-using coreArgs.Attributes;
-using System.Collections.Generic;
-
 namespace Octonauts.Core
 {
+    using System.Collections.Generic;
+    using coreArgs.Attributes;
+
     public class ProjectsParams : OctopusParams
     {
         [Option("projects", "list of projects to perform action on",

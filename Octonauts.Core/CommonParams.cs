@@ -1,4 +1,3 @@
-
 using coreArgs.Attributes;
 
 namespace Octonauts.Core

@@ -28,11 +28,13 @@ namespace Octonauts.Release
                 await ReleaseCreator.CreateRelease(options);
                 return;
             }
+
             if (options.PromoteToChannel)
             {
                 await ReleaseCreator.PromoteToChannel(options);
                 return;
             }
+
             if (options.DeleteRelease)
             {
                 await ReleaseOperationExecutor.Execute(options, new DeleteReleaseOperation());

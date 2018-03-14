@@ -1,14 +1,14 @@
-using coreArgs;
-using Octonauts.Core;
-using Octonauts.Core.OctopusClient;
-using Octopus.Client.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Octonauts.Packages
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Core;
+    using Core.OctopusClient;
+    using coreArgs;
+    using Octopus.Client.Model;
+
     public class Program
     {
         public static async Task Main(string[] args)
@@ -20,6 +20,7 @@ namespace Octonauts.Packages
                 Environment.Exit(-1);
                 return;
             }
+
             var projectsParams = options.Arguments;
                 OctopusParamsBuilder.FillOctopusParams(projectsParams);
             using (var client = await OctopusClientProvider.GetOctopusClient(projectsParams))
@@ -52,6 +53,7 @@ namespace Octonauts.Packages
                 var deployProcess = await client.Repository.DeploymentProcesses.Get(proj.DeploymentProcessId);
                 actions.AddRange(deployProcess.Steps.ToList().SelectMany(s => s.Actions));
             }
+
             return actions;
         }
     }

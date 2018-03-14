@@ -10,6 +10,7 @@ namespace Octonauts.Core.OctopusClient
             var endpoint = GetOctopusServerEndpoint(releaseCreationParams);
             return OctopusAsyncClient.Create(endpoint);
         }
+
         private static OctopusServerEndpoint GetOctopusServerEndpoint(OctopusParams releaseCreationParams)
         {
             var endpoint = new OctopusServerEndpoint(releaseCreationParams.ServerUrl, releaseCreationParams.ApiKey);
