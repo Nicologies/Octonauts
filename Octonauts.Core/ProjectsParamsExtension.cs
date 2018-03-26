@@ -1,3 +1,5 @@
+using System;
+
 namespace Octonauts.Core
 {
     using System.Collections.Generic;
@@ -21,6 +23,12 @@ namespace Octonauts.Core
             foreach (var prj in projectsInGroup.Select(x => x.Name))
             {
                 ret.Add(prj);
+            }
+
+            if (projectsParams.ExcludeProjects.Any())
+            {
+                var exclude = string.Join(",", projectsParams);
+                Console.WriteLine($"Excluded projects: {exclude}");
             }
 
             return ret.Except(projectsParams.ExcludeProjects).ToList();
