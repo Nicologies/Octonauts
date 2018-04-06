@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Octonauts.Environment": {
+      "commandName": "Project",
+      "commandLineArgs": "-e \"(^APAC -.*)|(^MENA -.*)|(NASA -.*)|(UKEU -.*)\"  --server-url http://10.2.6.7"
+    }
+  }
+}
