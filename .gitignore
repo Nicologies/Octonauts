@@ -34,3 +34,4 @@ packages/
 *.nupkg
 *.dll
 */publish/*
+launchSettings.json
