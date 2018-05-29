@@ -4,12 +4,12 @@ namespace Octonauts.Core
 {
     public static class OctopusParamsBuilder
     {
-        public static void FillOctopusParams(OctopusParams octopusParams)
+        public static void FillOctopusParams(this OctopusParams octopusParams)
         {
             FillOctopusParamsFromEnv(octopusParams);
         }
 
-        private static void FillOctopusParamsFromEnv(OctopusParams octopusParams)
+        private static void FillOctopusParamsFromEnv(this OctopusParams octopusParams)
         {
             var apikey = Environment.GetEnvironmentVariable("OCTOPUS_APIKEY");
             if (!string.IsNullOrWhiteSpace(apikey) && string.IsNullOrWhiteSpace(octopusParams.ApiKey))

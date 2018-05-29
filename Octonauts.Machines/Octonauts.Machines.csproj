@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Version.targets" />
+  <Import Project="../SetNuspecProperties.targets" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>Octonauts.Machines</AssemblyName>
+    <RootNamespace>Octonauts.Machines</RootNamespace>
+    <NuspecFile>../template.nuspec</NuspecFile>
+    <Authors>Nicologies</Authors>
+    <Company>Nicologies</Company>
+    <Description>Utility to get packages used by projects in a group</Description>
+    <PackageLicenseUrl>https://github.com/Nicologies/octonauts</PackageLicenseUrl>
+    <Copyright>Nicologies</Copyright>
+    <PackageProjectUrl>https://github.com/Nicologies/octonauts</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Nicologies/octonauts</RepositoryUrl>
+    <PackageTags>OctopusDeploy</PackageTags>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="nuget_packages\**" />
+    <EmbeddedResource Remove="nuget_packages\**" />
+    <None Remove="nuget_packages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coreArgs" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Octonauts.Core\Octonauts.Core.csproj" />
+  </ItemGroup>
+
+</Project>
