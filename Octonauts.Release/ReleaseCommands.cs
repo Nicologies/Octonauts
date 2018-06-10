@@ -15,6 +15,7 @@ namespace Octonauts.Release
             [Description("help")] HelpCmd,
             [Description("create")] CreateReleaseCmd,
             [Description("delete")] DeleteReleaseCmd,
+            [Description("delete-by-range")] DeleteReleasesByRangeCmd,
 
             [Description("update-variables")]
             UpdateReleaseVariablesCmd,
@@ -39,6 +40,9 @@ namespace Octonauts.Release
             },
             {
                 Commands.DeleteReleaseCmd.GetDescription(), new DeleteReleaseCmdHandler()
+            },
+            {
+                Commands.DeleteReleasesByRangeCmd.GetDescription(), new DeleteReleasesByRangeCmdHandler()
             },
             {
                 Commands.UpdateReleaseVariablesCmd.GetDescription(),
