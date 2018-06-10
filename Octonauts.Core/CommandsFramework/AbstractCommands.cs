@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Octonauts.Core;
 
-namespace Octonauts.Release.CommandsFramework
+namespace Octonauts.Core.CommandsFramework
 {
-    internal abstract class AbstractCommands
+    public abstract class AbstractCommands
     {
         public abstract string Command { get; set; }
 

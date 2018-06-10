@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using coreArgs.Attributes;
 using Octonauts.Core;
-using Octonauts.Release.CommandsFramework;
+using Octonauts.Core.CommandsFramework;
+using Octonauts.Release.ReleaseCreation;
+using Octonauts.Release.ReleaseModification;
 
-namespace Octonauts.Release.ReleaseCmdHandlers
+namespace Octonauts.Release
 {
     internal class ReleaseCommands : AbstractCommands
     {

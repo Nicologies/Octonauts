@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 
-namespace Octonauts.Release.CommandsFramework
+namespace Octonauts.Core.CommandsFramework
 {
-    internal interface ICommandHandler
+    public interface ICommandHandler
     {
         Task Handle(string[] args);
     }

@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Octonauts.Packages", "Octon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Octonauts.Environment", "Octonauts.Environment\Octonauts.Environment.csproj", "{97F83C3B-1D34-456D-9450-5E4F081C0767}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octonauts.Machines", "Octonauts.Machines\Octonauts.Machines.csproj", "{6EFDE104-31B0-4B8F-A1B2-7902C8395D0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Octonauts.Machines", "Octonauts.Machines\Octonauts.Machines.csproj", "{6EFDE104-31B0-4B8F-A1B2-7902C8395D0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octonauts.Cli", "Octonauts.Cli\Octonauts.Cli.csproj", "{9DB2858B-77AA-46A1-BDDD-D3EBC62540A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{6EFDE104-31B0-4B8F-A1B2-7902C8395D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EFDE104-31B0-4B8F-A1B2-7902C8395D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EFDE104-31B0-4B8F-A1B2-7902C8395D0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB2858B-77AA-46A1-BDDD-D3EBC62540A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB2858B-77AA-46A1-BDDD-D3EBC62540A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB2858B-77AA-46A1-BDDD-D3EBC62540A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB2858B-77AA-46A1-BDDD-D3EBC62540A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

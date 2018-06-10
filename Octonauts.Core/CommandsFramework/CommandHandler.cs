@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
-using Octonauts.Core;
 
-namespace Octonauts.Release.CommandsFramework
+namespace Octonauts.Core.CommandsFramework
 {
-    internal abstract class CommandHandler<T> : ICommandHandler
+    public abstract class CommandHandler<T> : ICommandHandler
         where T : OctopusParams
     {
         public async Task Handle(string[] args)

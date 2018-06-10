@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Octonauts.Release.CommandsFramework;
-using Octonauts.Release.ReleaseCmdHandlers.Params;
+using Octonauts.Core.CommandsFramework;
+using Octonauts.Release.Params;
 
-namespace Octonauts.Release.ReleaseCmdHandlers
+namespace Octonauts.Release.ReleaseCreation
 {
     internal class PromoteToChannelCmdHandler : CommandHandler<CreateReleaseParams>
     {

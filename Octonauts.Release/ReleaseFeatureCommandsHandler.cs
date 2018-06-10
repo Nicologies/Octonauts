@@ -1,10 +1,9 @@
 using System.Threading.Tasks;
-using Octonauts.Release.CommandsFramework;
-using Octonauts.Release.ReleaseCmdHandlers;
+using Octonauts.Core.CommandsFramework;
 
-namespace Octonauts.Release.FeatureLevelCommands
+namespace Octonauts.Release
 {
-    internal class ReleaseFeatureCommandsHandler : ICommandHandler
+    public class ReleaseFeatureCommandsHandler : ICommandHandler
     {
         private readonly ReleaseCommands _releaseCommands = new ReleaseCommands();
 

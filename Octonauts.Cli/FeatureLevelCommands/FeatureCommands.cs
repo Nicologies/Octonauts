@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using coreArgs.Attributes;
 using Octonauts.Core;
-using Octonauts.Release.CommandsFramework;
+using Octonauts.Core.CommandsFramework;
+using Octonauts.Release;
 
-namespace Octonauts.Release.FeatureLevelCommands
+namespace Octonauts.Cli.FeatureLevelCommands
 {
     internal class FeatureCommands : AbstractCommands
     {

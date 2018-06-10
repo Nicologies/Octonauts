@@ -2,10 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Octonauts.Core;
 using Octonauts.Core.OctopusClient;
-using Octonauts.Release.ReleaseCmdHandlers.Params;
+using Octonauts.Release.Params;
 using Octopus.Client.Exceptions;
 
-namespace Octonauts.Release.ReleaseCmdHandlers
+namespace Octonauts.Release.ReleaseModification
 {
     internal static class ModifyReleaseOperationExecutor
     {

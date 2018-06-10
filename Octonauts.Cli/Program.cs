@@ -1,7 +1,8 @@
+using System;
 using System.Threading.Tasks;
-using Octonauts.Release.FeatureLevelCommands;
+using Octonauts.Cli.FeatureLevelCommands;
 
-namespace Octonauts.Release
+namespace Octonauts.Cli
 {
     internal class Program
     {

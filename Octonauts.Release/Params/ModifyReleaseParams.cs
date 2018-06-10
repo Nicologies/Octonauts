@@ -1,7 +1,7 @@
 using coreArgs.Attributes;
 using Octonauts.Core;
 
-namespace Octonauts.Release.ReleaseCmdHandlers.Params
+namespace Octonauts.Release.Params
 {
     internal class ModifyReleaseParams : ProjectsParams
     {
