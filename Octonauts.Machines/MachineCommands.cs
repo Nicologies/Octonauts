@@ -12,6 +12,7 @@ namespace Octonauts.Machines
         {
             [Description("help")] HelpCmd,
             [Description("deploy-project")] DeployProject,
+            [Description("find-by-thumbprint")] FindByThumbprint,
         }
 
         protected override string GetHelpText()
@@ -26,6 +27,9 @@ namespace Octonauts.Machines
         {
             {
                 Commands.DeployProject.GetDescription(), new DeployProjectToMachinesCmdHandler()
+            },
+            {
+                Commands.FindByThumbprint.GetDescription(), new FindByThumbprintCmdHandler()
             },
             {
                 Commands.HelpCmd.GetDescription(), new HelpCmdHandler(GetHelpText())
