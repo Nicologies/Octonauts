@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Octonauts.Core;
 using Octonauts.Core.OctopusClient;
+using Octonauts.Release.ReleaseCmdHandlers.Params;
 using Octopus.Client;
 using Octopus.Client.Exceptions;
 using Octopus.Client.Model;
@@ -10,7 +11,7 @@ namespace Octonauts.Release.ReleaseCmdHandlers
 {
     internal static class ReleaseCreator
     {
-        public static async Task CreateRelease(ReleaseParams releaseParams)
+        public static async Task CreateRelease(CreateReleaseParams releaseParams)
         {
             using (var client = await OctopusClientProvider.GetOctopusClient(releaseParams))
             {
@@ -22,7 +23,7 @@ namespace Octonauts.Release.ReleaseCmdHandlers
         }
 
         private static async Task CreateRelease(string projectName,
-            ReleaseParams releaseParams, IOctopusAsyncClient octo)
+            CreateReleaseParams releaseParams, IOctopusAsyncClient octo)
         {
             var project = await octo.Repository.Projects.FindByName(projectName);
             var channel = await octo.GetChannelResource(project, releaseParams.Channel);
@@ -76,7 +77,7 @@ namespace Octonauts.Release.ReleaseCmdHandlers
             }
         }
 
-        public static async Task PromoteToChannel(ReleaseParams releaseParams)
+        public static async Task PromoteToChannel(CreateReleaseParams releaseParams)
         {
             using (var client = await OctopusClientProvider.GetOctopusClient(releaseParams))
             {

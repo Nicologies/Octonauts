@@ -2,13 +2,14 @@ using System;
 using System.Threading.Tasks;
 using Octonauts.Core;
 using Octonauts.Core.OctopusClient;
+using Octonauts.Release.ReleaseCmdHandlers.Params;
 using Octopus.Client.Exceptions;
 
 namespace Octonauts.Release.ReleaseCmdHandlers
 {
     internal static class ModifyReleaseOperationExecutor
     {
-        public static async Task Execute(ReleaseParams options, IModifyReleaseOperation operation)
+        public static async Task Execute<T>(T options, IModifyReleaseOperation<T> operation) where T : ModifyReleaseParams
         {
             using (var client = await OctopusClientProvider.GetOctopusClient(options))
             {
@@ -25,7 +26,7 @@ namespace Octonauts.Release.ReleaseCmdHandlers
                     {
                         var release =
                             await client.Repository.Projects.GetReleaseByVersion(project,
-                                options.GetEffectiveReleaseName());
+                                options.ReleaseName);
                         if (release == null)
                         {
                             Console.WriteLine($"Skipped {projectStr} as cannot find the release for this project");
