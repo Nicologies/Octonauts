@@ -6,9 +6,9 @@ using Octopus.Client.Exceptions;
 
 namespace Octonauts.Release.ReleaseCmdHandlers
 {
-    internal static class ReleaseOperationExecutor
+    internal static class ModifyReleaseOperationExecutor
     {
-        public static async Task Execute(ReleaseParams options, IReleaseOperation operation)
+        public static async Task Execute(ReleaseParams options, IModifyReleaseOperation operation)
         {
             using (var client = await OctopusClientProvider.GetOctopusClient(options))
             {

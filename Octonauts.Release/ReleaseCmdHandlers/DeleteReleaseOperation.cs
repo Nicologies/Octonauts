@@ -4,7 +4,7 @@ using Octopus.Client.Model;
 
 namespace Octonauts.Release.ReleaseCmdHandlers
 {
-    internal class DeleteReleaseOperation : IReleaseOperation
+    internal class DeleteReleaseOperation : IModifyReleaseOperation
     {
         public async Task Execute(IOctopusAsyncClient client, ReleaseParams releaseParams, ReleaseResource release)
         {

@@ -7,7 +7,7 @@ namespace Octonauts.Release.ReleaseCmdHandlers
     {
         protected override async Task Execute(ReleaseParams options)
         {
-            await ReleaseOperationExecutor.Execute(options, new DeleteReleaseOperation());
+            await ModifyReleaseOperationExecutor.Execute(options, new DeleteReleaseOperation());
         }
     }
 }
