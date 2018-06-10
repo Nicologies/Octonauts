@@ -1,22 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Octonauts.Core;
+using Octonauts.Core.CommandsFramework;
+using Octonauts.Core.OctopusClient;
+using Octopus.Client.Model;
+
 namespace Octonauts.Packages
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Core;
-    using Core.OctopusClient;
-    using Octopus.Client.Model;
-
-    public static class Program
+    internal class GetPackagesCmdHandler : CommandHandler<ProjectsParams>
     {
-        public static async Task Main(string[] args)
+        protected override async Task Execute(ProjectsParams options)
         {
-            var projectsParams = CommandArgsParaser.Parse<ProjectsParams>(args);
-                projectsParams.FillOctopusParams();
-            using (var client = await OctopusClientProvider.GetOctopusClient(projectsParams))
+            using (var client = await OctopusClientProvider.GetOctopusClient(options))
             {
-                var actions = await GetAllActionsFromProjects(projectsParams, client);
+                var actions = await GetAllActionsFromProjects(options, client);
                 var packages = GetPackagesFromActions(actions);
                 OutputPackages(packages);
             }

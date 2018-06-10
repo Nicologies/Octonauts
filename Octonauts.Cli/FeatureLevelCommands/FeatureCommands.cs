@@ -4,6 +4,7 @@ using coreArgs.Attributes;
 using Octonauts.Channel;
 using Octonauts.Core;
 using Octonauts.Core.CommandsFramework;
+using Octonauts.Packages;
 using Octonauts.Release;
 
 namespace Octonauts.Cli.FeatureLevelCommands
@@ -15,7 +16,9 @@ namespace Octonauts.Cli.FeatureLevelCommands
             [Description("release")]
             Release,
             [Description("channel")]
-            Channel
+            Channel,
+            [Description("package")]
+            Package,
         }
 
         [Option("feature", "The feature", required: true)]
@@ -25,6 +28,7 @@ namespace Octonauts.Cli.FeatureLevelCommands
         {
             { Features.Release.GetDescription(), new ReleaseFeatureCommandsHandler() },
             { Features.Channel.GetDescription(), new ChannelFeatureCommandsHandler() },
+            { Features.Package.GetDescription(), new PackageFeatureCommandsHandler() },
         };
 
         protected override string GetHelpText()
