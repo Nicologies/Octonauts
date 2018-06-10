@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Octopus.Client;
 using Octopus.Client.Model;
 
-namespace Octonauts.Release
+namespace Octonauts.Release.ReleaseCmdHandlers
 {
     internal interface IReleaseOperation
     {

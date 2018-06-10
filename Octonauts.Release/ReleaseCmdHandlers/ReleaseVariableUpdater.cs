@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Octonauts.Release
+namespace Octonauts.Release.ReleaseCmdHandlers
 {
     internal static class ReleaseVariableUpdater
     {

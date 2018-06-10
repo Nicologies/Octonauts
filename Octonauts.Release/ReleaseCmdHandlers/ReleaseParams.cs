@@ -1,7 +1,7 @@
 using coreArgs.Attributes;
 using Octonauts.Core;
 
-namespace Octonauts.Release
+namespace Octonauts.Release.ReleaseCmdHandlers
 {
     public class ReleaseParams : CommonParams
     {

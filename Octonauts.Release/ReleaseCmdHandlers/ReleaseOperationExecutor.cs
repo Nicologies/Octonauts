@@ -4,7 +4,7 @@ using Octonauts.Core;
 using Octonauts.Core.OctopusClient;
 using Octopus.Client.Exceptions;
 
-namespace Octonauts.Release
+namespace Octonauts.Release.ReleaseCmdHandlers
 {
     internal static class ReleaseOperationExecutor
     {
