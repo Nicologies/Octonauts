@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Octonauts.Core;
+using Octonauts.Core.CommandsFramework;
 using Octonauts.Core.OctopusClient;
 using Octopus.Client;
 using Octopus.Client.Model;
 
 namespace Octonauts.Environment
 {
-    public class Program
+    internal class DeleteEnvironmentsCmdHandler : CommandHandler<EnvironmentDeletionParams>
     {
-        private static async Task Main(string[] args)
+        protected override async Task Execute(EnvironmentDeletionParams options)
         {
-            var options = CommandArgsParaser.Parse<EnvironmentDeletionParams>(args);
-
-            options.FillOctopusParams();
             using (var client = await OctopusClientProvider.GetOctopusClient(options))
             {
                 var environments = await client.Repository.Environments.FindMany(e =>

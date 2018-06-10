@@ -1,5 +1,4 @@
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Packages

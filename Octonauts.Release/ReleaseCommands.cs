@@ -13,10 +13,10 @@ namespace Octonauts.Release
         private enum Commands
         {
             [Description("help")] HelpCmd,
-            [Description("create-release")] CreateReleaseCmd,
-            [Description("delete-release")] DeleteReleaseCmd,
+            [Description("create")] CreateReleaseCmd,
+            [Description("delete")] DeleteReleaseCmd,
 
-            [Description("update-release-variables")]
+            [Description("update-variables")]
             UpdateReleaseVariablesCmd,
             [Description("promote-to-channel")] PromoteToChannelCmd,
         }

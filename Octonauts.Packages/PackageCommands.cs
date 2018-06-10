@@ -11,7 +11,7 @@ namespace Octonauts.Packages
         private enum Commands
         {
             [Description("help")] HelpCmd,
-            [Description("get-packages")] GetPackagesCmd,
+            [Description("get-used")] GetPackagesCmd,
         }
 
         protected override string GetHelpText()

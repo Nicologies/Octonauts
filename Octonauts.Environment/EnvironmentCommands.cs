@@ -4,14 +4,13 @@ using coreArgs.Attributes;
 using Octonauts.Core;
 using Octonauts.Core.CommandsFramework;
 
-namespace Octonauts.Channel
+namespace Octonauts.Environment
 {
-    internal class ChannelCommands : AbstractCommands
+    internal class EnvironmentCommands : AbstractCommands
     {
         private enum Commands
         {
             [Description("help")] HelpCmd,
-            [Description("create")] CreateChannelCmd,
             [Description("delete")] DeleteChannelCmd,
         }
 
@@ -26,10 +25,7 @@ namespace Octonauts.Channel
         protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
         {
             {
-                Commands.CreateChannelCmd.GetDescription(), new CreateChannelCmdHandler()
-            },
-            {
-                Commands.DeleteChannelCmd.GetDescription(), new DeleteChannelCmdHandler()
+                Commands.DeleteChannelCmd.GetDescription(), new DeleteEnvironmentsCmdHandler()
             },
             {
                 Commands.HelpCmd.GetDescription(), new HelpCmdHandler(GetHelpText())
