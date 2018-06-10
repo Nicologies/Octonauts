@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using coreArgs.Attributes;
+using Octonauts.Channel;
 using Octonauts.Core;
 using Octonauts.Core.CommandsFramework;
 using Octonauts.Release;
@@ -12,7 +13,9 @@ namespace Octonauts.Cli.FeatureLevelCommands
         private enum Features
         {
             [Description("release")]
-            Release
+            Release,
+            [Description("channel")]
+            Channel
         }
 
         [Option("feature", "The feature", required: true)]
@@ -21,6 +24,7 @@ namespace Octonauts.Cli.FeatureLevelCommands
         protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
         {
             { Features.Release.GetDescription(), new ReleaseFeatureCommandsHandler() },
+            { Features.Channel.GetDescription(), new ChannelFeatureCommandsHandler() },
         };
 
         protected override string GetHelpText()

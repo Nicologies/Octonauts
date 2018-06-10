@@ -1,11 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Octonauts.Core;
-using Octonauts.Core.CommandsFramework;
 
-namespace Octonauts.Release
+namespace Octonauts.Core.CommandsFramework
 {
-    internal class HelpCmdHandler : CommandHandler<OctopusParams>
+    public class HelpCmdHandler : CommandHandler<OctopusParams>
     {
         private readonly string _helpText;
 

@@ -3,8 +3,7 @@
   <Import Project="../SetNuspecProperties.targets" />
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Octonauts.Channel</AssemblyName>
     <RootNamespace>Octonauts.Channel</RootNamespace>
     <NuspecFile>../template.nuspec</NuspecFile>
@@ -21,11 +20,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="nuget_packages\**" />
     <Compile Remove="publish\**" />
