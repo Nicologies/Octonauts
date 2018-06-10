@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using coreArgs;
 using Octonauts.Core;
 using Octonauts.Core.OctopusClient;
 using Octopus.Client;
@@ -15,27 +14,21 @@ namespace Octonauts.Environment
     {
         private static async Task Main(string[] args)
         {
-            var options = ArgsParser.Parse<EnvironmentDeletionParams>(args);
-            if (options.Errors.Count > 0)
-            {
-                Console.Write(ArgsParser.GetHelpText<EnvironmentDeletionParams>());
-                System.Environment.Exit(-1);
-                return;
-            }
+            var options = CommandArgsParaser.Parse<EnvironmentDeletionParams>(args);
 
-            options.Arguments.FillOctopusParams();
-            using (var client = await OctopusClientProvider.GetOctopusClient(options.Arguments))
+            options.FillOctopusParams();
+            using (var client = await OctopusClientProvider.GetOctopusClient(options))
             {
                 var environments = await client.Repository.Environments.FindMany(e =>
-                    Regex.IsMatch(e.Name, options.Arguments.EnvironmentNameRegex, RegexOptions.IgnoreCase));
+                    Regex.IsMatch(e.Name, options.EnvironmentNameRegex, RegexOptions.IgnoreCase));
                 var lifeCycles = await client.Repository.Lifecycles.FindAll();
 
-                await RemoveEnvFromLifecycles(lifeCycles, environments, client, options.Arguments.DryRun);
+                await RemoveEnvFromLifecycles(lifeCycles, environments, client, options.DryRun);
 
                 // ReSharper disable once AccessToDisposedClosure
                 foreach (var env in environments)
                 {
-                    await DeleteEnvironment(client, env, options.Arguments.DryRun).ConfigureAwait(false);
+                    await DeleteEnvironment(client, env, options.DryRun).ConfigureAwait(false);
                 }
             }
         }

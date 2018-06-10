@@ -1,6 +1,4 @@
-using System;
 using System.Threading.Tasks;
-using coreArgs;
 using Octonauts.Core;
 
 namespace Octonauts.Release
@@ -9,15 +7,9 @@ namespace Octonauts.Release
     {
         public static void Main(string[] args)
         {
-            var options = ArgsParser.Parse<ReleaseParams>(args);
-            if (options.Errors.Count > 0)
-            {
-                Console.Write(ArgsParser.GetHelpText<ReleaseParams>());
-                Environment.Exit(-1);
-                return;
-            }
+            var options = CommandArgsParaser.Parse<ReleaseParams>(args);
 
-            DispatchWork(options.Arguments).Wait();
+            DispatchWork(options).Wait();
         }
 
         private static async Task DispatchWork(ReleaseParams options)

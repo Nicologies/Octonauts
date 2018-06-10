@@ -6,22 +6,13 @@ namespace Octonauts.Packages
     using System.Threading.Tasks;
     using Core;
     using Core.OctopusClient;
-    using coreArgs;
     using Octopus.Client.Model;
 
     public static class Program
     {
         public static async Task Main(string[] args)
         {
-            var options = ArgsParser.Parse<ProjectsParams>(args);
-            if (options.Errors.Count > 0)
-            {
-                Console.Write(ArgsParser.GetHelpText<ProjectsParams>());
-                Environment.Exit(-1);
-                return;
-            }
-
-            var projectsParams = options.Arguments;
+            var projectsParams = CommandArgsParaser.Parse<ProjectsParams>(args);
                 projectsParams.FillOctopusParams();
             using (var client = await OctopusClientProvider.GetOctopusClient(projectsParams))
             {

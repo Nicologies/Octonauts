@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using coreArgs;
 using Octonauts.Core;
 using Octonauts.Core.OctopusClient;
 using Octopus.Client.Exceptions;
@@ -11,15 +10,7 @@ namespace Octonauts.Channel
     {
         public static async Task Main(string[] args)
         {
-            var options = ArgsParser.Parse<ChannelParams>(args);
-            if (options.Errors.Count > 0)
-            {
-                Console.Write(ArgsParser.GetHelpText<ChannelParams>());
-                Environment.Exit(-1);
-                return;
-            }
-
-            var channelParams = options.Arguments;
+            var channelParams = CommandArgsParaser.Parse<ChannelParams>(args);
             channelParams.FillOctopusParams();
             await CreateChannel(channelParams);
         }
