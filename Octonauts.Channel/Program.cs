@@ -20,7 +20,7 @@ namespace Octonauts.Channel
             }
 
             var channelParams = options.Arguments;
-            OctopusParamsBuilder.FillOctopusParams(channelParams);
+            channelParams.FillOctopusParams();
             await CreateChannel(channelParams);
         }
 

@@ -23,7 +23,7 @@ namespace Octonauts.Environment
                 return;
             }
 
-            OctopusParamsBuilder.FillOctopusParams(options.Arguments);
+            options.Arguments.FillOctopusParams();
             using (var client = await OctopusClientProvider.GetOctopusClient(options.Arguments))
             {
                 var environments = await client.Repository.Environments.FindMany(e =>
@@ -64,7 +64,8 @@ namespace Octonauts.Environment
             }
         }
 
-        private static async Task RemoveEnvFromLifecycles(List<LifecycleResource> lifeCycles, List<EnvironmentResource> environments, IOctopusAsyncClient client, bool dryRun)
+        private static async Task RemoveEnvFromLifecycles(IReadOnlyCollection<LifecycleResource> lifeCycles,
+            IEnumerable<EnvironmentResource> environments, IOctopusAsyncClient client, bool dryRun)
         {
             foreach (var env in environments)
             {

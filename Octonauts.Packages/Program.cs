@@ -9,7 +9,7 @@ namespace Octonauts.Packages
     using coreArgs;
     using Octopus.Client.Model;
 
-    public class Program
+    public static class Program
     {
         public static async Task Main(string[] args)
         {
@@ -22,7 +22,7 @@ namespace Octonauts.Packages
             }
 
             var projectsParams = options.Arguments;
-                OctopusParamsBuilder.FillOctopusParams(projectsParams);
+                projectsParams.FillOctopusParams();
             using (var client = await OctopusClientProvider.GetOctopusClient(projectsParams))
             {
                 var actions = await GetAllActionsFromProjects(projectsParams, client);
@@ -36,7 +36,7 @@ namespace Octonauts.Packages
             packages.ForEach(Console.WriteLine);
         }
 
-        private static List<string> GetPackagesFromActions(List<DeploymentActionResource> actions)
+        private static List<string> GetPackagesFromActions(IEnumerable<DeploymentActionResource> actions)
         {
             return actions.SelectMany(a => a.Properties)
                 .Where(p => p.Key == "Octopus.Action.Package.PackageId")

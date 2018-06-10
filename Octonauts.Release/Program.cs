@@ -22,7 +22,7 @@ namespace Octonauts.Release
 
         private static async Task DispatchWork(ReleaseParams options)
         {
-            OctopusParamsBuilder.FillOctopusParams(options);
+            options.FillOctopusParams();
             if (options.CreateRelease)
             {
                 await ReleaseCreator.CreateRelease(options);
