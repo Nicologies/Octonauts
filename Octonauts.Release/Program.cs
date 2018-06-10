@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Octonauts.Release.Commands;
+using Octonauts.Release.FeatureLevelCommands;
 
 namespace Octonauts.Release
 {
@@ -7,7 +7,7 @@ namespace Octonauts.Release
     {
         public static async Task Main(string[] args)
         {
-            await ReleaseCommands.DispatchCommand(args);
+            await new FeatureCommands().DispatchCommand<FeatureCommands>(args);
         }
     }
 }

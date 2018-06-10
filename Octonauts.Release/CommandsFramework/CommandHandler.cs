@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Octonauts.Core;
 
-namespace Octonauts.Release.Commands
+namespace Octonauts.Release.CommandsFramework
 {
     internal abstract class CommandHandler<T> : ICommandHandler
         where T : OctopusParams

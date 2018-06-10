@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Octonauts.Release.Commands;
+using Octonauts.Release.CommandsFramework;
 
 namespace Octonauts.Release.ReleaseCmdHandlers
 {

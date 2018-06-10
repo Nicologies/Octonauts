@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Octonauts.Core
 {
@@ -26,6 +28,11 @@ namespace Octonauts.Core
             }
 
             return enumerationValue.ToString();
+        }
+
+        public static IEnumerable<string> GetDescriptions<T>() where T : struct
+        {
+            return Enum.GetValues(typeof(T)).Cast<T>().Select(x => x.GetDescription());
         }
     }
 }

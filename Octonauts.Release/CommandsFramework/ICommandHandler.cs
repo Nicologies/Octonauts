@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Octonauts.Release.Commands
+namespace Octonauts.Release.CommandsFramework
 {
     internal interface ICommandHandler
     {
