@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Octonauts.Core;
 using Octonauts.Core.OctopusClient;
@@ -15,7 +16,14 @@ namespace Octonauts.Release.ReleaseCreation
         {
             using (var client = await OctopusClientProvider.GetOctopusClient(releaseParams))
             {
-                foreach (var project in await releaseParams.GetEffectiveProjects(client))
+                var effectiveProjects = await releaseParams.GetEffectiveProjects(client);
+                if (!effectiveProjects.Any())
+                {
+                    Console.Error.WriteLine("No project specified, please use the --project-group or --projects");
+                    Environment.Exit(-1);
+                }
+
+                foreach (var project in effectiveProjects)
                 {
                     await CreateRelease(project, releaseParams, client);
                 }
