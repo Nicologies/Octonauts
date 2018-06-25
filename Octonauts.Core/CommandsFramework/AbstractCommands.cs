@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Octonauts.Core.CommandsFramework
@@ -28,8 +29,15 @@ namespace Octonauts.Core.CommandsFramework
 
         protected static string GetHelpText<T>() where T : struct
         {
-            var cmds = EnumExtensions.GetDescriptions<T>();
-            return "Supported commands are: " + string.Join(",", cmds);
+            var cmds = CommandEnumExtensions.GetDescriptions<T>();
+            var sb = new StringBuilder();
+            sb.AppendLine("Supported commands are: ");
+            foreach (var cmd in cmds)
+            {
+                sb.AppendLine($"\t{cmd.CommandName.ToLowerInvariant()}:\t{cmd.Description}");
+            }
+
+            return sb.ToString();
         }
     }
 }

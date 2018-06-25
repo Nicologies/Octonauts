@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using coreArgs.Attributes;
-using Octonauts.Core;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Channel
@@ -10,9 +8,12 @@ namespace Octonauts.Channel
     {
         private enum Commands
         {
-            [Description("help")] HelpCmd,
-            [Description("create")] CreateChannelCmd,
-            [Description("delete")] DeleteChannelCmd,
+            [CommandDescription("help", "help")]
+            HelpCmd,
+            [CommandDescription("create", "Create a channel")]
+            CreateCmd,
+            [CommandDescription("delete", "Delete a channel")]
+            DeleteCmd,
         }
 
         protected override string GetHelpText()
@@ -20,19 +21,19 @@ namespace Octonauts.Channel
             return GetHelpText<Commands>();
         }
 
-        [Option("command", "The command to execute", required: true)]
+        [Option("command", "Specify the command to execute", required: true)]
         public override string Command { get; set; }
 
         protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
         {
             {
-                Commands.CreateChannelCmd.GetDescription(), new CreateChannelCmdHandler()
+                Commands.CreateCmd.GetDescription().CommandName, new CreateChannelCmdHandler()
             },
             {
-                Commands.DeleteChannelCmd.GetDescription(), new DeleteChannelCmdHandler()
+                Commands.DeleteCmd.GetDescription().CommandName, new DeleteChannelCmdHandler()
             },
             {
-                Commands.HelpCmd.GetDescription(), new HelpCmdHandler(GetHelpText())
+                Commands.HelpCmd.GetDescription().CommandName, new HelpCmdHandler(GetHelpText())
             },
         };
     }

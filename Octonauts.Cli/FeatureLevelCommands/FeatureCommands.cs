@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using coreArgs.Attributes;
 using Octonauts.Channel;
-using Octonauts.Core;
 using Octonauts.Core.CommandsFramework;
 using Octonauts.Environment;
 using Octonauts.Machines;
@@ -15,28 +13,31 @@ namespace Octonauts.Cli.FeatureLevelCommands
     {
         private enum Features
         {
-            [Description("release")]
+            [CommandDescription("help", "Help")]
+            Help,
+            [CommandDescription("release", "This feature contains Release related commands, such as create, delete, update variable snapshot and etc.")]
             Release,
-            [Description("channel")]
+            [CommandDescription("channel", "This feature contains Channel related commands, such as create and delete")]
             Channel,
-            [Description("package")]
+            [CommandDescription("package", "This feature contains Package related commands, for example: get packages used by project")]
             Package,
-            [Description("environment")]
+            [CommandDescription("environment", "This feature contains Environment related commands, for example: delete environments by regex pattern")]
             Environment,
-            [Description("machine")]
+            [CommandDescription("machine", "This feature contains Machine related commands, for example: find machine by thumbprint")]
             Machine,
         }
 
-        [Option("feature", "The feature", required: true)]
+        [Option("feature", "Specify the feature to use, or 'help' to see available features", required: true)]
         public override string Command { get; set; }
 
         protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
         {
-            { Features.Release.GetDescription(), new ReleaseFeatureCommandsHandler() },
-            { Features.Channel.GetDescription(), new ChannelFeatureCommandsHandler() },
-            { Features.Package.GetDescription(), new PackageFeatureCommandsHandler() },
-            { Features.Environment.GetDescription(), new EnvironmentFeatureCommandsHandler() },
-            { Features.Machine.GetDescription(), new MachineFeatureCommandsHandler() },
+            { Features.Release.GetDescription().CommandName, new ReleaseFeatureCommandsHandler() },
+            { Features.Channel.GetDescription().CommandName, new ChannelFeatureCommandsHandler() },
+            { Features.Package.GetDescription().CommandName, new PackageFeatureCommandsHandler() },
+            { Features.Environment.GetDescription().CommandName, new EnvironmentFeatureCommandsHandler() },
+            { Features.Machine.GetDescription().CommandName, new MachineFeatureCommandsHandler() },
+            { Features.Help.GetDescription().CommandName, new HelpCmdHandler(GetHelpText()) },
         };
 
         protected override string GetHelpText()

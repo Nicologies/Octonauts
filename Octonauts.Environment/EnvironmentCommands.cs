@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using coreArgs.Attributes;
-using Octonauts.Core;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Environment
@@ -10,8 +8,10 @@ namespace Octonauts.Environment
     {
         private enum Commands
         {
-            [Description("help")] HelpCmd,
-            [Description("delete")] DeleteChannelCmd,
+            [CommandDescription("help", "Help")]
+            Help,
+            [CommandDescription("delete", "Delete environments that matches regex pattern")]
+            DeleteCmd,
         }
 
         protected override string GetHelpText()
@@ -25,10 +25,10 @@ namespace Octonauts.Environment
         protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
         {
             {
-                Commands.DeleteChannelCmd.GetDescription(), new DeleteEnvironmentsCmdHandler()
+                Commands.DeleteCmd.GetDescription().CommandName, new DeleteEnvironmentsCmdHandler()
             },
             {
-                Commands.HelpCmd.GetDescription(), new HelpCmdHandler(GetHelpText())
+                Commands.Help.GetDescription().CommandName, new HelpCmdHandler(GetHelpText())
             },
         };
     }
