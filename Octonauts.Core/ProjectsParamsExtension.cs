@@ -27,7 +27,7 @@ namespace Octonauts.Core
 
             if (projectsParams.ExcludeProjects.Any())
             {
-                var exclude = string.Join(",", projectsParams);
+                var exclude = string.Join(",", projectsParams.ExcludeProjects);
                 Console.WriteLine($"Excluded projects: {exclude}");
             }
 
