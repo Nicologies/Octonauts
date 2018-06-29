@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace Octonauts.Core.CommandsFramework
@@ -9,6 +10,18 @@ namespace Octonauts.Core.CommandsFramework
         {
             var options = CommandArgsParaser.Parse<T>(args);
             options.FillOctopusParams();
+            if (string.IsNullOrWhiteSpace(options.ApiKey))
+            {
+                Console.Error.WriteLine("Octopus Api Key is required, you can provide it via command line: --api-key API-XXXXX or environment variable: OCTOPUS_APIKEY");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(options.ServerUrl))
+            {
+                Console.Error.WriteLine("Octopus server URL is required, you can provide it via command line: --server-url http://xxx.com or environment variable: OCTOPUS_SERVERURL");
+                return;
+            }
+
             await Execute(options);
         }
 
