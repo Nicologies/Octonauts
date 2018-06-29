@@ -8,7 +8,7 @@ namespace Octonauts.Environment
         [Option('e', "environment-name-regex", "", required: true)]
         public string EnvironmentNameRegex { get; set; }
 
-        [Option("dry-run", "", required: false)]
+        [Option("dry-run", "list the environments without actually deleting them", required: false)]
         public bool DryRun { get; set; } = false;
     }
 }
