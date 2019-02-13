@@ -3,7 +3,7 @@ using Octonauts.Cli.FeatureLevelCommands;
 
 namespace Octonauts.Cli
 {
-    internal class Program
+    internal static class Program
     {
         public static async Task Main(string[] args)
         {

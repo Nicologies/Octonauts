@@ -14,6 +14,8 @@ namespace Octonauts.Machines
             DeployProject,
             [CommandDescription("find-by-thumbprint", "Find a machine by its thumbprint")]
             FindByThumbprint,
+            [CommandDescription("list-machines", "list machines in an environment")]
+            ListMachines,
         }
 
         protected override string GetHelpText()
@@ -34,6 +36,9 @@ namespace Octonauts.Machines
             },
             {
                 Commands.HelpCmd.GetDescription().CommandName, new HelpCmdHandler(GetHelpText())
+            },
+            {
+                Commands.ListMachines.GetDescription().CommandName, new ListMachinesCmdHandler()
             },
         };
     }
