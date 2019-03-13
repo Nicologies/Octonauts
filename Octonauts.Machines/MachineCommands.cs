@@ -16,6 +16,8 @@ namespace Octonauts.Machines
             FindByThumbprint,
             [CommandDescription("list-machines", "list machines in an environment")]
             ListMachines,
+            [CommandDescription("set-roles", "set roles of the machine")]
+            SetRoles,
         }
 
         protected override string GetHelpText()
@@ -39,6 +41,9 @@ namespace Octonauts.Machines
             },
             {
                 Commands.ListMachines.GetDescription().CommandName, new ListMachinesCmdHandler()
+            },
+            {
+                Commands.SetRoles.GetDescription().CommandName, new SetRolesCmdHandler()
             },
         };
     }
