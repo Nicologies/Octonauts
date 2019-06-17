@@ -27,7 +27,7 @@ namespace Octonauts.Cli.FeatureLevelCommands
             Machine,
         }
 
-        [Option("feature", "Specify the feature to use, or 'help' to see available features", required: true)]
+        [Option("feature", "Specify the feature to use, or '--feature help' to see available features", required: true)]
         public override string Command { get; set; }
 
         protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
