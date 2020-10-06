@@ -35,3 +35,4 @@ _ReSharper*/
 *.dll
 */publish/*
 launchSettings.json
+/publish/

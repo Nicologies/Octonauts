@@ -13,11 +13,15 @@
 
         <copyright>$copyright$</copyright>
         <projectUrl>$projectUrl$</projectUrl>
-        <licenseUrl>$licenseUrl$</licenseUrl>
+        <license type="expression">MIT</license>
 
         <tags>$tags$</tags>
     </metadata>
     <files>
         <file src="$projectRootFolder$\publish\*.*" target="tools"/>
     </files>
+    
+    <packageTypes>
+      <packageType name="DotnetTool" />
+    </packageTypes>
 </package>

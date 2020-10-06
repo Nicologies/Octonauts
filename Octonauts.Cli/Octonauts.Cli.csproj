@@ -3,7 +3,7 @@
   <Import Project="../SetNuspecProperties.targets" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Octonauts.Cli</AssemblyName>
     <RootNamespace>Octonauts.Cli</RootNamespace>
     <NuspecFile>../template.nuspec</NuspecFile>
@@ -16,6 +16,9 @@
     <RepositoryUrl>https://github.com/Nicologies/octonauts</RepositoryUrl>
     <PackageTags>OctopusDeploy</PackageTags>
     <LangVersion>latest</LangVersion>
+    <PackAsTool/>
+    <ToolCommandName>Octonauts.Cli</ToolCommandName>
+    <PackageOutputPath>./nuget_packages</PackageOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="nuget_packages\**" />
