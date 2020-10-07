@@ -20,8 +20,6 @@ jobs:
     - name: Generate BuildNumber
       id: version
       run: echo "::set-output name=version::$(date +%Y.%m).${GITHUB_RUN_NUMBER}"
-    - name: Create Publish-able Binaries
-      run: dotnet publish ./Octonauts.Cli/Octonauts.Cli.csproj --output ./Octonauts.Cli/publish --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
     - name: Create Package
       run: dotnet pack ./Octonauts.Cli/Octonauts.Cli.csproj --output ./nuget_packages --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
     - name: publish to NuGet
@@ -35,6 +33,7 @@ jobs:
     - name: Create Package for choco
       run: dotnet pack ./Octonauts.Cli/Octonauts.Cli.csproj --output ./nuget_packages --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
     - name: Push Choco package
+      if: false
       uses: crazy-max/ghaction-chocolatey@v1.3.1
       with:
         args: push ./nuget_packages/Octonauts.Cli.${{steps.version.outputs.version}}.nupkg --source https://push.chocolatey.org/ --apikey ${{secrets.CHOCO_API_KEY}}
