@@ -30,10 +30,12 @@ jobs:
       uses: actions/checkout@v2
     - name: Create Publish-able Binaries for Win10-x86 for choco
       run: dotnet publish ./Octonauts.Cli/Octonauts.Cli.csproj --output ./Octonauts.Cli/publish --configuration Release -r win10-x86 /p:BuildNumber=${{steps.version.outputs.version}} 
-    - name: Create Package for choco
-      run: dotnet pack ./Octonauts.Cli/Octonauts.Cli.csproj --output ./nuget_packages --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
+    - name: Prepare nuspec for choco
+      run: pwsh ./PrepareChocoPack.ps1
+    - name: Prepare nuspec for choco
+      run: dotnet pack ./Octonauts.Cli/Octonauts.Cli.csproj --no-build --no-restore -p:NuspecFile=Octonauts.Cli.nuspec --configuration Release --output ./nuget_packages
     - name: Push Choco package
-      if: false
+      if: true
       uses: crazy-max/ghaction-chocolatey@v1.3.1
       with:
         args: push ./nuget_packages/Octonauts.Cli.${{steps.version.outputs.version}}.nupkg --source https://push.chocolatey.org/ --apikey ${{secrets.CHOCO_API_KEY}}

@@ -1,0 +1,11 @@
+VERIFICATION
+Verification is intended to assist the Chocolatey moderators and community
+in verifying that this package's contents are trustworthy.
+
+This package is published by the Nicologies himself. The binaries include
+those published from 
+ - coreArgs.dll: https://www.nuget.org/packages/coreArgs/
+ - Newtonsoft.Json.dll: https://www.nuget.org/packages/Newtonsoft.Json/
+ - Octopus.Client.dll: https://www.nuget.org/packages/Octopus.Client/
+ - all other exe/dll start with octonuats are from Nicologies, see https://github.com/Nicologies/Octonauts
+ - all the others are from Microsoft which is the dotnet core runtime.

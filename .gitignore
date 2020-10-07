@@ -36,3 +36,5 @@ _ReSharper*/
 */publish/*
 launchSettings.json
 /publish/
+/Octonauts.Cli/Octonauts.Cli.nuspec
+/temp/*
