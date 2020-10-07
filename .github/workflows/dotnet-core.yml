@@ -29,7 +29,7 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
     - name: Create Publish-able Binaries for Win10-x86 for choco
-      run: dotnet publish ./Octonauts.Cli/Octonauts.Cli.csproj --output ./Octonauts.Cli/publish --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
+      run: dotnet publish ./Octonauts.Cli/Octonauts.Cli.csproj --output ./Octonauts.Cli/publish --configuration Release -r win10-x86 /p:BuildNumber=${{steps.version.outputs.version}} 
     - name: Create Package for choco
       run: dotnet pack ./Octonauts.Cli/Octonauts.Cli.csproj --output ./nuget_packages --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
     - name: Push Choco package
