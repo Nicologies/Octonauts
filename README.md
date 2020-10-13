@@ -1,8 +1,14 @@
 Octonauts.Cli is a utility to manipulate Octopus projects, release, channels on a project group basis as well as some other useful commands.
 
-You can use [choco](https://chocolatey.org/install) to install it:
+You can use dotnet tool to install it:
 
 ```
-choco upgrade Octonauts.Cli
+dotnet tool update -g Octonauts.Cli
+```
+
+Then run it via command line 
+
+```
+Octonauts.Cli --help
 ```
 
