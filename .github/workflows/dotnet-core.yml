@@ -2,9 +2,9 @@ name: .NET Core
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, release-* ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, release-* ]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
     if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -24,16 +24,28 @@ jobs:
     - name: Create Package
       run: dotnet pack ./OctonautsCli/OctonautsCli.csproj --output ./nuget_packages --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
     - name: publish to NuGet
-      if: true
+      if: startsWith(github.ref, 'release-')
       run: dotnet nuget push --api-key ${{secrets.NUGETAPIKEY}} ./nuget_packages/*.nupkg -s https://api.nuget.org/v3/index.json
-    - name: Create Publish-able Binaries for Win10-x86 for choco
-      run: dotnet publish ./OctonautsCli/OctonautsCli.csproj --output ./OctonautsCli/publish --configuration Release -r win10-x86  /p:BuildNumber=${{steps.version.outputs.version}} /p:PublishSingleFile=true
+    - name: Create Publish-able Binaries for choco
+      run: dotnet publish ./OctonautsCli/OctonautsCli.csproj --output ./OctonautsCli/publish --configuration Release -r win7-x86  /p:BuildNumber=${{steps.version.outputs.version}} /p:PublishSingleFile=true
     - name: Prepare nuspec for choco
       run: pwsh ./PrepareChocoPack.ps1
     - name: Pack for choco
       run: dotnet pack ./OctonautsCli/OctonautsCli.csproj --no-build --no-restore -p:NuspecFile=OctonautsCli.nuspec --configuration Release --output ./choco_packages
     - name: Push Choco package
-      if: true
+      if: startsWith(github.ref, 'release-')
       uses: crazy-max/ghaction-chocolatey@v1.3.1
       with:
         args: push ./choco_packages/octonautscli.${{steps.version.outputs.version}}.nupkg --source https://push.chocolatey.org/ --apikey ${{secrets.CHOCO_API_KEY}}
+    - name: Create Release
+      if: startsWith(github.ref, 'release-')
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{steps.version.outputs.version}}
+        release_name: Release ${{steps.version.outputs.version}}
+        body:
+        draft: false
+        prerelease: true
