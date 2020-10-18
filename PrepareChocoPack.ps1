@@ -5,7 +5,15 @@ New-Item -Type Directory ./temp -ErrorAction SilentlyContinue
 Copy-Item $pkg ./temp/temp.zip
 Expand-Archive ./temp/temp.zip -DestinationPath ./temp
 $content = Get-Content ./temp/OctonautsCli.nuspec -Raw
+$meta = ([xml]$content).package.metadata
+$projUrl = $meta.projectUrl
 $replaceWith = @"
+  <title>$($meta.id)</title>
+  <owners>$($meta.authors)</owners>
+  <releaseNotes>$projUrl/releases</releaseNotes>
+  <packageSourceUrl>$projUrl</packageSourceUrl>
+  <bugTrackerUrl>$projUrl/issues</bugTrackerUrl>
+  <summary>$($meta.description)</summary>
 </metadata>
   <files>
     <file src=".\publish\*.*" target="tools"/>
