@@ -15,8 +15,9 @@
     <LangVersion>latest</LangVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>Octonauts.Cli</ToolCommandName>
+    <ToolCommandName>Octonauts</ToolCommandName>
     <PackageOutputPath>./nuget_packages</PackageOutputPath>
+    <PackageId>OctonautsCli</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="nuget_packages\**" />

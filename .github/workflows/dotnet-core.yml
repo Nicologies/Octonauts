@@ -31,9 +31,9 @@ jobs:
     - name: Prepare nuspec for choco
       run: pwsh ./PrepareChocoPack.ps1
     - name: Prepare nuspec for choco
-      run: dotnet pack ./Octonauts.Cli/Octonauts.Cli.csproj --no-build --no-restore -p:NuspecFile=Octonauts.Cli.nuspec --configuration Release --output ./nuget_packages
+      run: dotnet pack ./Octonauts.Cli/Octonauts.Cli.csproj --no-build --no-restore -p:NuspecFile=OctonautsCli.nuspec --configuration Release --output ./choco_packages
     - name: Push Choco package
       if: true
       uses: crazy-max/ghaction-chocolatey@v1.3.1
       with:
-        args: push ./nuget_packages/Octonauts.Cli.${{steps.version.outputs.version}}.nupkg --source https://push.chocolatey.org/ --apikey ${{secrets.CHOCO_API_KEY}}
+        args: push ./choco_packages/OctonautsCli.${{steps.version.outputs.version}}.nupkg --source https://push.chocolatey.org/ --apikey ${{secrets.CHOCO_API_KEY}}

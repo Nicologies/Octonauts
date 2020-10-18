@@ -38,3 +38,5 @@ launchSettings.json
 /publish/
 /Octonauts.Cli/Octonauts.Cli.nuspec
 /temp/*
+/Octonauts.Cli/OctonautsCli.nuspec
+/Octonauts.Cli/LICENSE.txt
