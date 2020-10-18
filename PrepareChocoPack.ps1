@@ -11,6 +11,7 @@ $replaceWith = @"
     <file src=".\publish\*.*" target="tools"/>
     <file src="..\LICENSE.txt"/>
     <file src=".\VERIFICATION.txt"/>
+    <file src=".\logo.png"/>
   </files>
 "@
 $content = $content.Replace("</metadata>", $replaceWith)
