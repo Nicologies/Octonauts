@@ -36,9 +36,9 @@ _ReSharper*/
 */publish/*
 launchSettings.json
 /publish/
-/Octonauts.Cli/Octonauts.Cli.nuspec
+/OctonautsCli/OctonautsCli.nuspec
 /temp/*
-/Octonauts.Cli/OctonautsCli.nuspec
-/Octonauts.Cli/LICENSE.txt
+/OctonautsCli/OctonautsCli.nuspec
+/OctonautsCli/LICENSE.txt
 /choco_packages/
 /nuget_packages

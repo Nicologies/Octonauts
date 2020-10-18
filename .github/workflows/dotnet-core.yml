@@ -22,16 +22,16 @@ jobs:
       id: version
       run: echo "::set-output name=version::$(date +%Y.%m).${GITHUB_RUN_NUMBER}"
     - name: Create Package
-      run: dotnet pack ./Octonauts.Cli/Octonauts.Cli.csproj --output ./nuget_packages --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
+      run: dotnet pack ./OctonautsCli/OctonautsCli.csproj --output ./nuget_packages --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
     - name: publish to NuGet
       if: true
       run: dotnet nuget push --api-key ${{secrets.NUGETAPIKEY}} ./nuget_packages/*.nupkg -s https://api.nuget.org/v3/index.json
     - name: Create Publish-able Binaries for Win10-x86 for choco
-      run: dotnet publish ./Octonauts.Cli/Octonauts.Cli.csproj --output ./Octonauts.Cli/publish --configuration Release -r win10-x86  /p:BuildNumber=${{steps.version.outputs.version}} /p:PublishSingleFile=true
+      run: dotnet publish ./OctonautsCli/OctonautsCli.csproj --output ./OctonautsCli/publish --configuration Release -r win10-x86  /p:BuildNumber=${{steps.version.outputs.version}} /p:PublishSingleFile=true
     - name: Prepare nuspec for choco
       run: pwsh ./PrepareChocoPack.ps1
     - name: Prepare nuspec for choco
-      run: dotnet pack ./Octonauts.Cli/Octonauts.Cli.csproj --no-build --no-restore -p:NuspecFile=OctonautsCli.nuspec --configuration Release --output ./choco_packages
+      run: dotnet pack ./OctonautsCli/OctonautsCli.csproj --no-build --no-restore -p:NuspecFile=OctonautsCli.nuspec --configuration Release --output ./choco_packages
     - name: Push Choco package
       if: true
       uses: crazy-max/ghaction-chocolatey@v1.3.1

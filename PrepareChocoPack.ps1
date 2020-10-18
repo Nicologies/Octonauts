@@ -1,4 +1,4 @@
-Copy-Item ./LICENSE.txt ./Octonauts.Cli/LICENSE.txt
+Copy-Item ./LICENSE.txt ./OctonautsCli/LICENSE.txt
 $pkg = (Get-Item ./nuget_packages/*.nupkg).FullName
 Remove-Item -Recurse -Force ./temp -ErrorAction SilentlyContinue
 New-Item -Type Directory ./temp -ErrorAction SilentlyContinue
@@ -23,4 +23,4 @@ $replaceWith = @"
   </files>
 "@
 $content = $content.Replace("</metadata>", $replaceWith)
-Set-Content ./Octonauts.Cli/OctonautsCli.nuspec $content
+Set-Content ./OctonautsCli/OctonautsCli.nuspec $content

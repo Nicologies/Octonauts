@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>Octonauts.Cli</AssemblyName>
-    <RootNamespace>Octonauts.Cli</RootNamespace>
+    <AssemblyName>OctonautsCli</AssemblyName>
+    <RootNamespace>OctonautsCli</RootNamespace>
     <Authors>Nicologies</Authors>
     <Company>Nicologies</Company>
     <Description>Utility to manipulate Octopus on a project group level</Description>

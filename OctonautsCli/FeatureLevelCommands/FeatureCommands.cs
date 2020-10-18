@@ -7,7 +7,7 @@ using Octonauts.Machines;
 using Octonauts.Packages;
 using Octonauts.Release;
 
-namespace Octonauts.Cli.FeatureLevelCommands
+namespace OctonautsCli.FeatureLevelCommands
 {
     internal class FeatureCommands : AbstractCommands
     {

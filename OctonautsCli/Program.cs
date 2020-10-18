@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Octonauts.Cli.FeatureLevelCommands;
+using OctonautsCli.FeatureLevelCommands;
 
-namespace Octonauts.Cli
+namespace OctonautsCli
 {
     internal static class Program
     {
