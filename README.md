@@ -3,12 +3,24 @@ Octonauts.Cli is a utility to manipulate Octopus projects, release, channels on 
 You can use dotnet tool to install it:
 
 ```
-dotnet tool update -g Octonauts.Cli
+dotnet tool update -g OctonautsCli
 ```
 
 Then run it via command line 
 
 ```
-Octonauts.Cli --help
+Octonauts --help
+```
+
+Or use choco
+
+```
+choco upgrade OctonautsCli
+```
+
+then run it via command line
+
+```
+OctonautsCli
 ```
 

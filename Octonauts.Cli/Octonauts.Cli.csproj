@@ -7,7 +7,7 @@
     <RootNamespace>Octonauts.Cli</RootNamespace>
     <Authors>Nicologies</Authors>
     <Company>Nicologies</Company>
-    <Description>Utility to manipulate Octopus</Description>
+    <Description>Utility to manipulate Octopus on a project group level</Description>
     <Copyright>Nicologies</Copyright>
     <PackageProjectUrl>https://github.com/Nicologies/octonauts</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Nicologies/octonauts</RepositoryUrl>
