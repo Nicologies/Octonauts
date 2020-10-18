@@ -27,7 +27,7 @@ jobs:
       if: true
       run: dotnet nuget push --api-key ${{secrets.NUGETAPIKEY}} ./nuget_packages/*.nupkg -s https://api.nuget.org/v3/index.json
     - name: Create Publish-able Binaries for Win10-x86 for choco
-      run: dotnet publish ./Octonauts.Cli/Octonauts.Cli.csproj --output ./Octonauts.Cli/publish --configuration Release -r win10-x86 /p:BuildNumber=${{steps.version.outputs.version}} 
+      run: dotnet publish ./Octonauts.Cli/Octonauts.Cli.csproj --output ./Octonauts.Cli/publish --configuration Release -r win10-x86  /p:BuildNumber=${{steps.version.outputs.version}} /p:PublishSingleFile=true
     - name: Prepare nuspec for choco
       run: pwsh ./PrepareChocoPack.ps1
     - name: Prepare nuspec for choco
