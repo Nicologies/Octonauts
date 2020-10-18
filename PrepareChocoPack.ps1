@@ -23,4 +23,5 @@ $replaceWith = @"
   </files>
 "@
 $content = $content.Replace("</metadata>", $replaceWith)
+$content = $content -replace "<id>.*</id>", "<id>$($meta.id.ToLower())</id>"
 Set-Content ./OctonautsCli/OctonautsCli.nuspec $content
