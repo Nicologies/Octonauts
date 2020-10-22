@@ -7,7 +7,7 @@ namespace OctonautsCli
     {
         public static async Task Main(string[] args)
         {
-            await new FeatureFeature().DispatchCommand<FeatureFeature>(args);
+            await new AllFeatures().DispatchToFeature(args);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Octonauts.Channel
     {
         private enum Commands
         {
-            [CommandDescription("help", "help")]
+            [CommandDescription("help", "shows the available commands")]
             HelpCmd,
             [CommandDescription("create", "Create a channel")]
             CreateCmd,
@@ -16,13 +16,10 @@ namespace Octonauts.Channel
             DeleteCmd,
         }
 
-        public override string GetHelpText()
+        public override string GetHelpText(string indent)
         {
-            return GetHelpText<Commands>();
+            return GetHelpText<Commands>(indent);
         }
-
-        [Option("command", "Specify the command to execute", required: true)]
-        public override string Command { get; set; }
 
         protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
         {
@@ -33,7 +30,7 @@ namespace Octonauts.Channel
                 Commands.DeleteCmd.GetDescription().CommandName, new DeleteChannelCmdHandler()
             },
             {
-                Commands.HelpCmd.GetDescription().CommandName, new HelpCmdHandler(GetHelpText())
+                Commands.HelpCmd.GetDescription().CommandName, new HelpCmdHandler(GetHelpText(""))
             },
         };
     }

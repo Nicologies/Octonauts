@@ -20,13 +20,10 @@ namespace Octonauts.Machines
             SetRoles,
         }
 
-        public override string GetHelpText()
+        public override string GetHelpText(string indent)
         {
-            return GetHelpText<Commands>();
+            return GetHelpText<Commands>(indent);
         }
-
-        [Option("command", "The command to execute", required: true)]
-        public override string Command { get; set; }
 
         protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
         {
@@ -37,7 +34,7 @@ namespace Octonauts.Machines
                 Commands.FindByThumbprint.GetDescription().CommandName, new FindByThumbprintCmdHandler()
             },
             {
-                Commands.HelpCmd.GetDescription().CommandName, new HelpCmdHandler(GetHelpText())
+                Commands.HelpCmd.GetDescription().CommandName, new HelpCmdHandler(GetHelpText(""))
             },
             {
                 Commands.ListMachines.GetDescription().CommandName, new ListMachinesCmdHandler()

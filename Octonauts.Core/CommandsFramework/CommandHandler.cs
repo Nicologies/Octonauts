@@ -8,7 +8,7 @@ namespace Octonauts.Core.CommandsFramework
     {
         public async Task Handle(string[] args)
         {
-            var options = CommandArgsParaser.Parse<T>(args);
+            var options = CommandArgsParser.Parse<T>(args, "");
             options.FillOctopusParams();
             if (string.IsNullOrWhiteSpace(options.ApiKey))
             {
