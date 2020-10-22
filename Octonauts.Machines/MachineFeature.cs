@@ -4,7 +4,7 @@ using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Machines
 {
-    internal class MachineCommands : AbstractCommands
+    public class MachineFeature : AbstractFeature
     {
         private enum Commands
         {
@@ -20,7 +20,7 @@ namespace Octonauts.Machines
             SetRoles,
         }
 
-        protected override string GetHelpText()
+        public override string GetHelpText()
         {
             return GetHelpText<Commands>();
         }

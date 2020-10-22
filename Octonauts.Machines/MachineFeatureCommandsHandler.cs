@@ -1,15 +1,11 @@
-using System.Threading.Tasks;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Machines
 {
-    public class MachineFeatureCommandsHandler : ICommandHandler
+    public class MachineFeatureCommandsHandler : FeatureHandler<MachineFeature>
     {
-        private readonly MachineCommands _commands = new MachineCommands();
-
-        public async Task Handle(string[] args)
+        public MachineFeatureCommandsHandler() : base(new MachineFeature())
         {
-            await _commands.DispatchCommand<MachineCommands>(args);
         }
     }
 }

@@ -1,15 +1,11 @@
-using System.Threading.Tasks;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Release
 {
-    public class ReleaseFeatureCommandsHandler : ICommandHandler
+    public class ReleaseFeatureCommandsHandler : FeatureHandler<ReleaseFeature>
     {
-        private readonly ReleaseCommands _releaseCommands = new ReleaseCommands();
-
-        public async Task Handle(string[] args)
+        public ReleaseFeatureCommandsHandler() : base(new ReleaseFeature())
         {
-            await _releaseCommands.DispatchCommand<ReleaseCommands>(args);
         }
     }
 }

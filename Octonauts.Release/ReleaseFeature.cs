@@ -6,7 +6,7 @@ using Octonauts.Release.ReleaseModification;
 
 namespace Octonauts.Release
 {
-    internal class ReleaseCommands : AbstractCommands
+    public class ReleaseFeature : AbstractFeature
     {
         private enum Commands
         {
@@ -24,7 +24,7 @@ namespace Octonauts.Release
             PromoteToChannelCmd,
         }
 
-        protected override string GetHelpText()
+        public override string GetHelpText()
         {
             return GetHelpText<Commands>();
         }

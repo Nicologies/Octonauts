@@ -4,7 +4,7 @@ using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Environment
 {
-    internal class EnvironmentCommands : AbstractCommands
+    public class EnvironmentFeature : AbstractFeature
     {
         private enum Commands
         {
@@ -14,7 +14,7 @@ namespace Octonauts.Environment
             DeleteCmd,
         }
 
-        protected override string GetHelpText()
+        public override string GetHelpText()
         {
             return GetHelpText<Commands>();
         }

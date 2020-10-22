@@ -4,7 +4,7 @@ using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Channel
 {
-    internal class ChannelCommands : AbstractCommands
+    public class ChannelFeature : AbstractFeature
     {
         private enum Commands
         {
@@ -16,7 +16,7 @@ namespace Octonauts.Channel
             DeleteCmd,
         }
 
-        protected override string GetHelpText()
+        public override string GetHelpText()
         {
             return GetHelpText<Commands>();
         }

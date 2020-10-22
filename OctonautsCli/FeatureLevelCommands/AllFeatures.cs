@@ -9,7 +9,7 @@ using Octonauts.Release;
 
 namespace OctonautsCli.FeatureLevelCommands
 {
-    internal class FeatureCommands : AbstractCommands
+    internal class AllFeatures : AbstractFeature
     {
         private enum Features
         {
@@ -40,7 +40,7 @@ namespace OctonautsCli.FeatureLevelCommands
             { Features.Help.GetDescription().CommandName, new HelpCmdHandler(GetHelpText()) },
         };
 
-        protected override string GetHelpText()
+        public override string GetHelpText()
         {
             return GetHelpText<Features>();
         }

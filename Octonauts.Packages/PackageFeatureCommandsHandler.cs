@@ -1,15 +1,11 @@
-﻿using System.Threading.Tasks;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Packages
 {
-    public class PackageFeatureCommandsHandler : ICommandHandler
+    public class PackageFeatureCommandsHandler : FeatureHandler<PackageFeature>
     {
-        private readonly PackageCommands _commands = new PackageCommands();
-
-        public async Task Handle(string[] args)
+        public PackageFeatureCommandsHandler() : base(new PackageFeature())
         {
-            await _commands.DispatchCommand<PackageCommands>(args);
         }
     }
 }

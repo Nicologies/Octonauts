@@ -1,15 +1,11 @@
-using System.Threading.Tasks;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Environment
 {
-    public class EnvironmentFeatureCommandsHandler : ICommandHandler
+    public class EnvironmentFeatureCommandsHandler : FeatureHandler<EnvironmentFeature>
     {
-        private readonly EnvironmentCommands _commands = new EnvironmentCommands();
-
-        public async Task Handle(string[] args)
+        public EnvironmentFeatureCommandsHandler() : base(new EnvironmentFeature())
         {
-            await _commands.DispatchCommand<EnvironmentCommands>(args);
         }
     }
 }

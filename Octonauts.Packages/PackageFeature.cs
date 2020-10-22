@@ -4,7 +4,7 @@ using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Packages
 {
-    internal class PackageCommands : AbstractCommands
+    public class PackageFeature : AbstractFeature
     {
         private enum Commands
         {
@@ -14,7 +14,7 @@ namespace Octonauts.Packages
             GetPackagesCmd,
         }
 
-        protected override string GetHelpText()
+        public override string GetHelpText()
         {
             return GetHelpText<Commands>();
         }
