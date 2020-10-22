@@ -22,8 +22,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="nuget_packages\**" />
+    <Compile Remove="publish\**" />
     <EmbeddedResource Remove="nuget_packages\**" />
+    <EmbeddedResource Remove="publish\**" />
     <None Remove="nuget_packages\**" />
+    <None Remove="publish\**" />
     <None Include="..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
