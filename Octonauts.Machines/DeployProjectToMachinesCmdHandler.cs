@@ -24,6 +24,26 @@ namespace Octonauts.Machines
 
                 foreach (var machine in machines)
                 {
+                    if (machine.IsDisabled)
+                    {
+                        Console.WriteLine($"Skipping disabled {machine.Name}, {machine.Id}");
+                        continue;
+                    }
+
+                    if (machine.HealthStatus != MachineModelHealthStatus.Healthy &&
+                        machine.HealthStatus != MachineModelHealthStatus.HasWarnings)
+                    {
+                        Console.WriteLine($"Skipping unhealthy {machine.Name}, {machine.Id}");
+                        continue;
+                    }
+
+                    if (!await CanDeployToMachineCheckingRoles(client, machine, release, env.Id))
+                    {
+                        Console.WriteLine("Machine doesn't have required roles");
+                        continue;
+                    }
+
+                    Console.WriteLine($"Deploying to {machine.Name}, {machine.Id}");
                     var depResource = new DeploymentResource
                     {
                         Comments =
@@ -40,7 +60,14 @@ namespace Octonauts.Machines
                         QueueTime = null
                     };
 
-                    await client.Repository.Deployments.Create(depResource);
+                    try
+                    {
+                        await client.Repository.Deployments.Create(depResource);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Error.WriteLine(ex);
+                    }
 
                     if (options.SleepSeconds > 0)
                     {
@@ -48,6 +75,32 @@ namespace Octonauts.Machines
                     }
                 }
             }
+        }
+
+        private async Task<bool> CanDeployToMachineCheckingRoles(IOctopusAsyncClient client, MachineResource machine, ReleaseResource release, string envId)
+        {
+            var deployTarget = await GetDeploymentTargetEnvironment(client, release, envId);
+            var preview = await client.Repository.Releases.GetPreview(deployTarget);
+            var stepsNeedRole = preview.StepsToExecute.Where(s => s.Roles.Any()).ToList();
+
+            if (stepsNeedRole.Count < preview.StepsToExecute.Count)
+            { // if any step doesn't require a role, then we can deploy the step to the machine.
+                return true;
+            }
+
+            return stepsNeedRole.Any(step => step.Roles.Any(r => machine.Roles.Contains(r)));
+        }
+
+        private async Task<DeploymentPromotionTarget> GetDeploymentTargetEnvironment(
+            IOctopusAsyncClient client, ReleaseResource release, string envId)
+        {
+            var deploymentTemplate = await client.Repository.Releases.GetTemplate(release);
+            if (deploymentTemplate == null)
+            {
+                throw new Exception("Unable to retrieve template for release. Deployment failed");
+            }
+
+            return deploymentTemplate.PromoteTo.FirstOrDefault(x => string.Equals(x.Id, envId));
         }
 
         private static async Task<List<MachineResource>> GetActiveMachines(IOctopusAsyncClient client, IResource env)
