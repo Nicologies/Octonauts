@@ -20,7 +20,7 @@ jobs:
         dotnet-version: 3.1.301
     - name: Generate BuildNumber
       id: version
-      run: echo "::set-output name=version::$(date +%Y.%m).${GITHUB_RUN_NUMBER}"
+      run: echo "::set-output name=version::$(date +%Y.%-m).${GITHUB_RUN_NUMBER}"
     - name: Create Package
       run: dotnet pack ./OctonautsCli/OctonautsCli.csproj --output ./nuget_packages --configuration Release /p:BuildNumber=${{steps.version.outputs.version}} 
     - name: publish to NuGet
