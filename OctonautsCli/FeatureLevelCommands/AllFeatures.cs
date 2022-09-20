@@ -37,8 +37,8 @@ namespace OctonautsCli.FeatureLevelCommands
             stringBuilder.AppendLine("\t'--feature release --command create help' to see the required args to create a release");
             stringBuilder.AppendLine("");
             stringBuilder.AppendLine("To avoid entering the Server Url and APIKey every time, you can define them as environment variables");
-            stringBuilder.AppendLine("\tOCTOPUS_SERVERURL for the server url");
-            stringBuilder.AppendLine("\tOCTOPUS_APIKEY for the API key");
+            stringBuilder.AppendLine("\tOCTOPUS_CLI_SERVER for the server url");
+            stringBuilder.AppendLine("\tOCTOPUS_CLI_API_KEY for the API key");
             stringBuilder.AppendLine("Supported Features:");
             foreach (var handler in _allFeatures)
             {
