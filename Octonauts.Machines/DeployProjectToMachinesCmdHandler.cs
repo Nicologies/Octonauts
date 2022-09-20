@@ -75,6 +75,10 @@ namespace Octonauts.Machines
             }
         }
 
+        public override string FeatureName => MachineFeature.StaticFeatureName;
+        public override string CommandName => "deploy-project";
+        public override string CommandDescription => "Individually deploy a project to machines in an environment";
+
         private async Task<bool> CanDeployToMachineCheckingRoles(IOctopusAsyncClient client, MachineResource machine, ReleaseResource release, string envId)
         {
             var deployTarget = await GetDeploymentTargetEnvironment(client, release, envId);

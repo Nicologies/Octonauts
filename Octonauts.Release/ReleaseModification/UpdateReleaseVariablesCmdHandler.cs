@@ -10,5 +10,9 @@ namespace Octonauts.Release.ReleaseModification
         {
             await ModifyReleaseOperationExecutor.Execute(options, new UpdateReleaseVariablesOperation());
         }
+
+        public override string FeatureName => ReleaseFeature.StaticFeatureName;
+        public override string CommandName => "update-variables";
+        public override string CommandDescription => "Update variable snapshot for a release for project(s) or project group";
     }
 }

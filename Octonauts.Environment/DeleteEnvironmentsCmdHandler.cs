@@ -28,6 +28,10 @@ namespace Octonauts.Environment
             }
         }
 
+        public override string FeatureName => EnvironmentFeature.StaticFeatureName;
+        public override string CommandName => "delete";
+        public override string CommandDescription => "Delete environments that matches regex pattern";
+
         private static async Task DeleteEnvironment(IOctopusAsyncClient client, EnvironmentResource env, bool dryRun)
         {
             Console.WriteLine($"Deleting {env.Name}");

@@ -42,5 +42,9 @@ namespace Octonauts.Channel
                 }
             }
         }
+
+        public override string FeatureName => ChannelFeature.StaticFeatureName;
+        public override string CommandName => "delete";
+        public override string CommandDescription => "Delete a channel";
     }
 }

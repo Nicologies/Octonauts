@@ -25,13 +25,13 @@ namespace Octonauts.Release.ReleaseModification
         {
             if (!SemanticVersion.TryParse(options.FromVersion, out var from))
             {
-                Console.Error.WriteLine($"Invalid 'from' version: {options.FromVersion}");
+                await Console.Error.WriteLineAsync($"Invalid 'from' version: {options.FromVersion}");
                 return;
             }
 
             if (!SemanticVersion.TryParse(options.ToVersion, out var to))
             {
-                Console.Error.WriteLine($"Invalid 'to' version: {options.ToVersion}");
+                await Console.Error.WriteLineAsync($"Invalid 'to' version: {options.ToVersion}");
                 return;
             }
 
@@ -79,5 +79,9 @@ namespace Octonauts.Release.ReleaseModification
                 }
             }
         }
+
+        public override string FeatureName => ReleaseFeature.StaticFeatureName;
+        public override string CommandName => "delete-by-range";
+        public override string CommandDescription => "Batch delete releases by version range";
     }
 }

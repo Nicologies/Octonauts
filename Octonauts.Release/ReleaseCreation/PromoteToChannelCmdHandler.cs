@@ -10,5 +10,9 @@ namespace Octonauts.Release.ReleaseCreation
         {
             await ReleaseCreator.PromoteToChannel(options);
         }
+
+        public override string FeatureName => ReleaseFeature.StaticFeatureName;
+        public override string CommandName => "promote-to-channel";
+        public override string CommandDescription => "Promote a release to another channel for project(s) or project group";
     }
 }

@@ -5,27 +5,11 @@ namespace Octonauts.Environment
 {
     public class EnvironmentFeature : AbstractFeature
     {
-        private enum Commands
-        {
-            [CommandDescription("help", "Help")]
-            Help,
-            [CommandDescription("delete", "Delete environments that matches regex pattern")]
-            DeleteCmd,
-        }
+        public static readonly string StaticFeatureName = "environment";
+        public override string FeatureDescription => "This feature contains Environment related commands, for example: delete environments by regex pattern";
 
-        public override string GetHelpText(string indent)
+        public EnvironmentFeature(IEnumerable<ICommandHandler> handlers) : base(handlers, StaticFeatureName)
         {
-            return GetHelpText<Commands>(indent);
         }
-
-        protected override Dictionary<string, ICommandHandler> Dispatcher => new()
-        {
-            {
-                Commands.DeleteCmd.GetDescription().CommandName, new DeleteEnvironmentsCmdHandler()
-            },
-            {
-                Commands.Help.GetDescription().CommandName, new HelpCmdHandler(GetHelpText(""))
-            },
-        };
     }
 }

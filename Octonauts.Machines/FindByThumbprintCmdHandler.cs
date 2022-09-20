@@ -22,5 +22,9 @@ namespace Octonauts.Machines
                 Console.WriteLine(m.Name);
             }
         }
+
+        public override string FeatureName => MachineFeature.StaticFeatureName;
+        public override string CommandName => "find-by-thumbprint";
+        public override string CommandDescription => "Find a machine by its thumbprint";
     }
 }

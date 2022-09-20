@@ -15,5 +15,9 @@ namespace Octonauts.Machines
             await client.Repository.Machines.CreateOrModify(machine.Name, machine.Endpoint,
                 environments.ToArray(), options.Roles.ToArray());
         }
+
+        public override string FeatureName => MachineFeature.StaticFeatureName;
+        public override string CommandName => "set-roles";
+        public override string CommandDescription => "set roles of the machine";
     }
 }

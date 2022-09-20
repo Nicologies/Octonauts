@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Autofac;
 using OctonautsCli.FeatureLevelCommands;
 
 namespace OctonautsCli
@@ -7,7 +8,9 @@ namespace OctonautsCli
     {
         public static async Task Main(string[] args)
         {
-            await new AllFeatures().DispatchToFeature(args);
+            var container = IocSetup.Setup();
+            var allFeatures = container.Resolve<AllFeatures>();
+            await allFeatures.DispatchToFeature(args);
         }
     }
 }

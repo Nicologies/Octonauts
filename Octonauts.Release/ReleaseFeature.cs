@@ -1,53 +1,16 @@
 using System.Collections.Generic;
 using Octonauts.Core.CommandsFramework;
-using Octonauts.Release.ReleaseCreation;
-using Octonauts.Release.ReleaseModification;
 
 namespace Octonauts.Release
 {
     public class ReleaseFeature : AbstractFeature
     {
-        private enum Commands
-        {
-            [CommandDescription("help", "Help")]
-            HelpCmd,
-            [CommandDescription("create", "Create a release for project(s) or project group")]
-            CreateReleaseCmd,
-            [CommandDescription("delete", "Delete a release from project(s) or project group")]
-            DeleteReleaseCmd,
-            [CommandDescription("delete-by-range", "Batch delete releases by version range")]
-            DeleteReleasesByRangeCmd,
-            [CommandDescription("update-variables", "Update variable snapshot for a release for project(s) or project group")]
-            UpdateReleaseVariablesCmd,
-            [CommandDescription("promote-to-channel", "Promote a release to another channel for project(s) or project group")]
-            PromoteToChannelCmd,
-        }
+        public static readonly string StaticFeatureName = "release";
 
-        public override string GetHelpText(string indent)
-        {
-            return GetHelpText<Commands>(indent);
-        }
+        public override string FeatureDescription => "This feature contains Release related commands, such as create, delete, update variable snapshot and etc.";
 
-        protected override Dictionary<string, ICommandHandler> Dispatcher => new()
+        public ReleaseFeature(IEnumerable<ICommandHandler> handlers) : base(handlers, StaticFeatureName)
         {
-            {
-                Commands.CreateReleaseCmd.GetDescription().CommandName, new CreateReleaseCmdHandler()
-            },
-            {
-                Commands.PromoteToChannelCmd.GetDescription().CommandName, new PromoteToChannelCmdHandler()
-            },
-            {
-                Commands.DeleteReleaseCmd.GetDescription().CommandName, new DeleteReleaseCmdHandler()
-            },
-            {
-                Commands.DeleteReleasesByRangeCmd.GetDescription().CommandName, new DeleteReleasesByRangeCmdHandler()
-            },
-            {
-                Commands.UpdateReleaseVariablesCmd.GetDescription().CommandName, new UpdateReleaseVariablesCmdHandler()
-            },
-            {
-                Commands.HelpCmd.GetDescription().CommandName, new HelpCmdHandler(GetHelpText(""))
-            },
-        };
+        }
     }
 }

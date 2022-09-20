@@ -32,5 +32,9 @@ namespace Octonauts.Machines
             var json = JsonConvert.SerializeObject(machines, Formatting.Indented);
             Console.WriteLine(json);
         }
+
+        public override string FeatureName => MachineFeature.StaticFeatureName;
+        public override string CommandName => "list-machines";
+        public override string CommandDescription => "list machines in an environment";
     }
 }

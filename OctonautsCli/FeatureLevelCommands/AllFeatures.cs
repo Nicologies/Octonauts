@@ -4,70 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using coreArgs.Attributes;
-using Octonauts.Channel;
 using Octonauts.Core;
 using Octonauts.Core.CommandsFramework;
-using Octonauts.Environment;
-using Octonauts.Machines;
-using Octonauts.Packages;
-using Octonauts.Release;
 
 namespace OctonautsCli.FeatureLevelCommands
 {
     internal class AllFeatures
     {
-        private class RootHelperCommandsHandler : IFeatureHandler
+        private readonly IDictionary<string, AbstractFeature> _allFeatures;
+
+        public AllFeatures(IEnumerable<AbstractFeature> allFeatures)
         {
-            private readonly Func<string, string> _getHelpText;
-
-            public RootHelperCommandsHandler(Func<string, string> getHelpText)
-            {
-                _getHelpText = getHelpText;
-            }
-
-            public async Task Handle(string[] args)
-            {
-                await Console.Out.WriteLineAsync(_getHelpText(""));
-            }
-
-            public string GetHelpText(string indent)
-            {
-                return $"{indent}show above help message";
-            }
+            _allFeatures = allFeatures.ToDictionary(x => x.FeatureName.ToLowerInvariant(), x => x);
         }
 
-        public AllFeatures()
+        public class FeatureOption
         {
-            Dispatcher.Add(Features.Help.GetDescription().CommandName, new RootHelperCommandsHandler(x => GetHelpText()));
+            [Option('f', "feature", "Specify the feature to use, for example '--feature release' to use the release feature", required: true)]
+            public string Feature { get; set; }
         }
-
-        private enum Features
-        {
-            [CommandDescription("help", "Help")]
-            Help,
-            [CommandDescription("release", "This feature contains Release related commands, such as create, delete, update variable snapshot and etc.")]
-            Release,
-            [CommandDescription("channel", "This feature contains Channel related commands, such as create and delete")]
-            Channel,
-            [CommandDescription("package", "This feature contains Package related commands, for example: get packages used by project")]
-            Package,
-            [CommandDescription("environment", "This feature contains Environment related commands, for example: delete environments by regex pattern")]
-            Environment,
-            [CommandDescription("machine", "This feature contains Machine related commands, for example: find machine by thumbprint")]
-            Machine
-        }
-
-        [Option('f', "feature", "Specify the feature to use, for example '--feature release' to use the release feature", required: true)]
-        public string Feature { get; set; }
-
-        protected Dictionary<string, IFeatureHandler> Dispatcher = new()
-        {
-            { Features.Release.GetDescription().CommandName, new ReleaseFeatureCommandsHandler() },
-            { Features.Channel.GetDescription().CommandName, new ChannelFeatureCommandsHandler() },
-            { Features.Package.GetDescription().CommandName, new PackageFeatureCommandsHandler() },
-            { Features.Environment.GetDescription().CommandName, new EnvironmentFeatureCommandsHandler() },
-            { Features.Machine.GetDescription().CommandName, new MachineFeatureCommandsHandler() },
-        };
 
         public string GetHelpText()
         {
@@ -85,11 +40,13 @@ namespace OctonautsCli.FeatureLevelCommands
             stringBuilder.AppendLine("\tOCTOPUS_SERVERURL for the server url");
             stringBuilder.AppendLine("\tOCTOPUS_APIKEY for the API key");
             stringBuilder.AppendLine("Supported Features:");
-            foreach (var handler in Dispatcher)
+            foreach (var handler in _allFeatures)
             {
-                stringBuilder.AppendLine($"\t{handler.Key}");
+                stringBuilder.AppendLine($"\t{handler.Key} {handler.Value.FeatureDescription}");
                 stringBuilder.AppendLine($"{handler.Value.GetHelpText("\t\t")}");
             }
+            stringBuilder.AppendLine("\thelp\tshow above help information");
+
 
             return stringBuilder.ToString();
         }
@@ -102,10 +59,10 @@ namespace OctonautsCli.FeatureLevelCommands
                 return;
             }
 
-            var options = CommandArgsParser.Parse<AllFeatures>(args, "");
-            if (Dispatcher.TryGetValue(options.Feature.ToLowerInvariant(), out var handler))
+            var options = CommandArgsParser.Parse<FeatureOption>(args, "");
+            if (_allFeatures.TryGetValue(options.Feature.ToLowerInvariant(), out var handler))
             {
-                await handler.Handle(args);
+                await handler.DispatchCommand(args);
             }
             else
             {

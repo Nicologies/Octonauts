@@ -20,6 +20,10 @@ namespace Octonauts.Packages
             OutputPackages(packages);
         }
 
+        public override string FeatureName => PackageFeature.StaticFeatureName;
+        public override string CommandName => "get-used";
+        public override string CommandDescription => "Get packages used by project(s) or project group";
+
         private static void OutputPackages(List<string> packages)
         {
             packages.ForEach(Console.WriteLine);

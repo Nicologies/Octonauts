@@ -34,5 +34,9 @@ namespace Octonauts.Channel
                 }
             }
         }
+
+        public override string FeatureName => ChannelFeature.StaticFeatureName;
+        public override string CommandName => "create";
+        public override string CommandDescription => "Create a channel";
     }
 }

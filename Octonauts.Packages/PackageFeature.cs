@@ -5,28 +5,12 @@ namespace Octonauts.Packages
 {
     public class PackageFeature : AbstractFeature
     {
-        private enum Commands
-        {
-            [CommandDescription("help", "Help")]
-            HelpCmd,
-            [CommandDescription("get-used", "Get packages used by project(s) or project group")]
-            // ReSharper disable once InconsistentNaming
-            GetPackagesCmd,
-        }
+        public static readonly string StaticFeatureName = "package";
 
-        public override string GetHelpText(string indent)
-        {
-            return GetHelpText<Commands>(indent);
-        }
+        public override string FeatureDescription => "This feature contains Package related commands, for example: get packages used by project";
 
-        protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
+        public PackageFeature(IEnumerable<ICommandHandler> handlers) : base(handlers, StaticFeatureName)
         {
-            {
-                Commands.GetPackagesCmd.GetDescription().CommandName, new GetPackagesCmdHandler()
-            },
-            {
-                Commands.HelpCmd.GetDescription().CommandName, new HelpCmdHandler(GetHelpText(""))
-            },
-        };
+        }
     }
 }

@@ -37,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.4.0" />
     <PackageReference Include="coreArgs" Version="1.0.0" />
     <PackageReference Include="Octopus.Client" Version="4.30.2" />
   </ItemGroup>

@@ -10,5 +10,9 @@ namespace Octonauts.Release.ReleaseCreation
         {
             await ReleaseCreator.CreateRelease(options);
         }
+
+        public override string FeatureName { get; } = ReleaseFeature.StaticFeatureName;
+        public override string CommandName => "create";
+        public override string CommandDescription => "Create a release for project(s) or project group";
     }
 }
