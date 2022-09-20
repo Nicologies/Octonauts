@@ -71,14 +71,14 @@ namespace Octonauts.Release.ReleaseCreation
                 }
                 else
                 {
-                    Console.Error.WriteLine(
+                    await Console.Error.WriteLineAsync(
                         $"Failed to create release for {projectName} in channel {channel.Name} {octoEx}");
                     throw;
                 }
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"Failed to create release for {projectName} in channel {channel.Name} {ex}");
+                await Console.Error.WriteLineAsync($"Failed to create release for {projectName} in channel {channel.Name} {ex}");
                 throw;
             }
         }

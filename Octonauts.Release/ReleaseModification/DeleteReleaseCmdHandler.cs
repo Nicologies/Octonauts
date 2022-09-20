@@ -11,7 +11,7 @@ namespace Octonauts.Release.ReleaseModification
             await ModifyReleaseOperationExecutor.Execute(options, new DeleteReleaseOperation());
         }
 
-        public override string FeatureName { get; } = ReleaseFeature.StaticFeatureName;
+        public override string FeatureName => ReleaseFeature.StaticFeatureName;
         public override string CommandName => "delete";
         public override string CommandDescription => "Delete a release from project(s) or project group";
     }
