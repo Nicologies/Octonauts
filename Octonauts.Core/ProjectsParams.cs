@@ -7,13 +7,13 @@ namespace Octonauts.Core
     {
         [Option("projects", "list of projects to perform action on",
             required: false)]
-        public List<string> Projects { get; set; } = new List<string>();
+        public List<string> Projects { get; set; } = new();
         [Option("project-group", "perform action on all projects in this project group",
             required: false)]
         public string ProjectGroup { get; set; }
 
         [Option("exclude-projects", "list of projects to exclude",
             required: false)]
-        public List<string> ExcludeProjects { get; set; } = new List<string>();
+        public List<string> ExcludeProjects { get; set; } = new();
     }
 }

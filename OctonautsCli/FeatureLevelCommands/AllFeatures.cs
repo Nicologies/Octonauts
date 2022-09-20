@@ -60,7 +60,7 @@ namespace OctonautsCli.FeatureLevelCommands
         [Option('f', "feature", "Specify the feature to use, for example '--feature release' to use the release feature", required: true)]
         public string Feature { get; set; }
 
-        protected Dictionary<string, IFeatureHandler> Dispatcher = new Dictionary<string, IFeatureHandler>
+        protected Dictionary<string, IFeatureHandler> Dispatcher = new()
         {
             { Features.Release.GetDescription().CommandName, new ReleaseFeatureCommandsHandler() },
             { Features.Channel.GetDescription().CommandName, new ChannelFeatureCommandsHandler() },

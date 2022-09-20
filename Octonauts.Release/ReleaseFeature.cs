@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using coreArgs.Attributes;
 using Octonauts.Core.CommandsFramework;
 using Octonauts.Release.ReleaseCreation;
 using Octonauts.Release.ReleaseModification;
@@ -29,7 +28,7 @@ namespace Octonauts.Release
             return GetHelpText<Commands>(indent);
         }
 
-        protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
+        protected override Dictionary<string, ICommandHandler> Dispatcher => new()
         {
             {
                 Commands.CreateReleaseCmd.GetDescription().CommandName, new CreateReleaseCmdHandler()

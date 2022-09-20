@@ -9,16 +9,15 @@ using Octopus.Client.Model;
 
 namespace Octonauts.Packages
 {
+    // ReSharper disable once InconsistentNaming
     internal class GetPackagesCmdHandler : CommandHandler<ProjectsParams>
     {
         protected override async Task Execute(ProjectsParams options)
         {
-            using (var client = await OctopusClientProvider.GetOctopusClient(options))
-            {
-                var actions = await GetAllActionsFromProjects(options, client);
-                var packages = GetPackagesFromActions(actions);
-                OutputPackages(packages);
-            }
+            using var client = await OctopusClientProvider.GetOctopusClient(options);
+            var actions = await GetAllActionsFromProjects(options, client);
+            var packages = GetPackagesFromActions(actions);
+            OutputPackages(packages);
         }
 
         private static void OutputPackages(List<string> packages)

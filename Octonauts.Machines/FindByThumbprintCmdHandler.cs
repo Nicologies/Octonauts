@@ -10,18 +10,16 @@ namespace Octonauts.Machines
     {
         protected override async Task Execute(FindByThumbprintParams options)
         {
-            using (var client = await OctopusClientProvider.GetOctopusClient(options))
+            using var client = await OctopusClientProvider.GetOctopusClient(options);
+            var machines = await client.Repository.Machines.FindByThumbprint(options.Thumbprint);
+            if (!machines.Any())
             {
-                var machines = await client.Repository.Machines.FindByThumbprint(options.Thumbprint);
-                if (!machines.Any())
-                {
-                    Console.WriteLine("Machine not found");
-                }
+                Console.WriteLine("Machine not found");
+            }
 
-                foreach (var m in machines)
-                {
-                    Console.WriteLine(m.Name);
-                }
+            foreach (var m in machines)
+            {
+                Console.WriteLine(m.Name);
             }
         }
     }

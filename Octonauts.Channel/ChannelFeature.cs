@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using coreArgs.Attributes;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Channel
@@ -21,7 +20,7 @@ namespace Octonauts.Channel
             return GetHelpText<Commands>(indent);
         }
 
-        protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
+        protected override Dictionary<string, ICommandHandler> Dispatcher => new()
         {
             {
                 Commands.CreateCmd.GetDescription().CommandName, new CreateChannelCmdHandler()

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using coreArgs.Attributes;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Packages
@@ -11,6 +10,7 @@ namespace Octonauts.Packages
             [CommandDescription("help", "Help")]
             HelpCmd,
             [CommandDescription("get-used", "Get packages used by project(s) or project group")]
+            // ReSharper disable once InconsistentNaming
             GetPackagesCmd,
         }
 

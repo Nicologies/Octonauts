@@ -15,64 +15,62 @@ namespace Octonauts.Machines
     {
         protected override async Task Execute(DeployParams options)
         {
-            using (var client = await OctopusClientProvider.GetOctopusClient(options))
+            using var client = await OctopusClientProvider.GetOctopusClient(options);
+            var env = await GetEnvironment(client, options.Environment);
+            var machines = await GetActiveMachines(client, env);
+            var project = await client.Repository.Projects.FindByName(options.Project);
+            var release = await client.Repository.Projects.GetReleaseByVersion(project, options.Version);
+
+            foreach (var machine in machines)
             {
-                var env = await GetEnvironment(client, options.Environment);
-                var machines = await GetActiveMachines(client, env);
-                var project = await client.Repository.Projects.FindByName(options.Project);
-                var release = await client.Repository.Projects.GetReleaseByVersion(project, options.Version);
-
-                foreach (var machine in machines)
+                if (machine.IsDisabled)
                 {
-                    if (machine.IsDisabled)
-                    {
-                        Console.WriteLine($"Skipping disabled {machine.Name}, {machine.Id}");
-                        continue;
-                    }
+                    Console.WriteLine($"Skipping disabled {machine.Name}, {machine.Id}");
+                    continue;
+                }
 
-                    if (machine.HealthStatus != MachineModelHealthStatus.Healthy &&
-                        machine.HealthStatus != MachineModelHealthStatus.HasWarnings)
-                    {
-                        Console.WriteLine($"Skipping unhealthy {machine.Name}, {machine.Id}");
-                        continue;
-                    }
+                if (machine.HealthStatus != MachineModelHealthStatus.Healthy &&
+                    machine.HealthStatus != MachineModelHealthStatus.HasWarnings)
+                {
+                    Console.WriteLine($"Skipping unhealthy {machine.Name}, {machine.Id}");
+                    continue;
+                }
 
-                    if (!await CanDeployToMachineCheckingRoles(client, machine, release, env.Id))
-                    {
-                        Console.WriteLine("Machine doesn't have required roles");
-                        continue;
-                    }
+                if (!await CanDeployToMachineCheckingRoles(client, machine, release, env.Id))
+                {
+                    Console.WriteLine("Machine doesn't have required roles");
+                    continue;
+                }
 
-                    Console.WriteLine($"Deploying to {machine.Name}, {machine.Id}");
-                    var depResource = new DeploymentResource
-                    {
-                        Comments =
-                            $"Individually deploy project to machines in environment {options.Environment}",
-                        TenantId = null,
-                        EnvironmentId = env.Id,
-                        SkipActions = new ReferenceCollection(),
-                        ReleaseId = release.Id,
-                        ForcePackageDownload = false,
-                        UseGuidedFailure = false,
-                        SpecificMachineIds = new ReferenceCollection(machine.Id),
-                        ForcePackageRedeployment = false,
-                        FormValues = new Dictionary<string, string>(),
-                        QueueTime = null
-                    };
+                Console.WriteLine($"Deploying to {machine.Name}, {machine.Id}");
+                var depResource = new DeploymentResource
+                {
+                    Comments =
+                        $"Individually deploy project to machines in environment {options.Environment}",
+                    TenantId = null,
+                    EnvironmentId = env.Id,
+                    SkipActions = new ReferenceCollection(),
+                    ReleaseId = release.Id,
+                    ForcePackageDownload = false,
+                    UseGuidedFailure = false,
+                    SpecificMachineIds = new ReferenceCollection(machine.Id),
+                    ForcePackageRedeployment = false,
+                    FormValues = new Dictionary<string, string>(),
+                    QueueTime = null
+                };
 
-                    try
-                    {
-                        await client.Repository.Deployments.Create(depResource);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.Error.WriteLine(ex);
-                    }
+                try
+                {
+                    await client.Repository.Deployments.Create(depResource);
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(ex);
+                }
 
-                    if (options.SleepSeconds > 0)
-                    {
-                        Thread.Sleep(TimeSpan.FromSeconds(options.SleepSeconds));
-                    }
+                if (options.SleepSeconds > 0)
+                {
+                    Thread.Sleep(TimeSpan.FromSeconds(options.SleepSeconds));
                 }
             }
         }

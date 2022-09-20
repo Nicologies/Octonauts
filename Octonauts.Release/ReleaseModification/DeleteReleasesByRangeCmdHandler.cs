@@ -35,48 +35,46 @@ namespace Octonauts.Release.ReleaseModification
                 return;
             }
 
-            using (var client = await OctopusClientProvider.GetOctopusClient(options))
+            using var client = await OctopusClientProvider.GetOctopusClient(options);
+            foreach (var projectStr in await options.GetEffectiveProjects(client))
             {
-                foreach (var projectStr in await options.GetEffectiveProjects(client))
+                var project = await client.Repository.Projects.FindByName(projectStr);
+                if (project == null)
                 {
-                    var project = await client.Repository.Projects.FindByName(projectStr);
-                    if (project == null)
+                    Console.WriteLine($"Skipped {projectStr} as cannot find this project");
+                    continue;
+                }
+
+                var releases =
+                    await client.Repository.Projects.GetAllReleases(project);
+                if (releases == null || !releases.Any())
+                {
+                    Console.WriteLine($"Skipped {projectStr} as cannot find the release for this project");
+                    continue;
+                }
+
+                foreach (var release in releases)
+                {
+                    if (!SemanticVersion.TryParse(release.Version, out var current))
                     {
-                        Console.WriteLine($"Skipped {projectStr} as cannot find this project");
+                        Console.WriteLine(
+                            $"Skipped deleting a version for project {projectStr} as unable to interpret version: {release.Version}");
                         continue;
                     }
 
-                    var releases =
-                        await client.Repository.Projects.GetAllReleases(project);
-                    if (releases == null || !releases.Any())
+                    if (current < from || current > to)
+                    {
+                        continue;
+                    }
+
+                    Console.WriteLine($"Deleting {release.Version} for project {projectStr}");
+                    try
+                    {
+                        await client.Repository.Releases.Delete(release);
+                    }
+                    catch (OctopusResourceNotFoundException)
                     {
                         Console.WriteLine($"Skipped {projectStr} as cannot find the release for this project");
-                        continue;
-                    }
-
-                    foreach (var release in releases)
-                    {
-                        if (!SemanticVersion.TryParse(release.Version, out var current))
-                        {
-                            Console.WriteLine(
-                                $"Skipped deleteing a version for project {projectStr} as unable to interpret version: {release.Version}");
-                            continue;
-                        }
-
-                        if (current < from || current > to)
-                        {
-                            continue;
-                        }
-
-                        Console.WriteLine($"Deleting {release.Version} for project {projectStr}");
-                        try
-                        {
-                            await client.Repository.Releases.Delete(release);
-                        }
-                        catch (OctopusResourceNotFoundException)
-                        {
-                            Console.WriteLine($"Skipped {projectStr} as cannot find the release for this project");
-                        }
                     }
                 }
             }

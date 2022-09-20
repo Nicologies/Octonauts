@@ -12,27 +12,25 @@ namespace Octonauts.Machines
     {
         protected override async Task Execute(ListMachinesParams options)
         {
-            using (var client = await OctopusClientProvider.GetOctopusClient(options))
+            using var client = await OctopusClientProvider.GetOctopusClient(options);
+            List<MachineResource> machines;
+            if (!string.IsNullOrWhiteSpace(options.Environment))
             {
-                List<MachineResource> machines;
-                if (!string.IsNullOrWhiteSpace(options.Environment))
+                var env = await client.Repository.Environments.FindByName(options.Environment);
+                if (env == null)
                 {
-                    var env = await client.Repository.Environments.FindByName(options.Environment);
-                    if (env == null)
-                    {
-                        Console.Error.WriteLine($"Environment {options.Environment} not found");
-                    }
-
-                    machines = await client.Repository.Environments.GetMachines(env);
-                }
-                else
-                {
-                    machines = await client.Repository.Machines.FindAll();
+                    await Console.Error.WriteLineAsync($"Environment {options.Environment} not found");
                 }
 
-                var json = JsonConvert.SerializeObject(machines, Formatting.Indented);
-                Console.WriteLine(json);
+                machines = await client.Repository.Environments.GetMachines(env);
             }
+            else
+            {
+                machines = await client.Repository.Machines.FindAll();
+            }
+
+            var json = JsonConvert.SerializeObject(machines, Formatting.Indented);
+            Console.WriteLine(json);
         }
     }
 }

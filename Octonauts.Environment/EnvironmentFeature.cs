@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using coreArgs.Attributes;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Environment
@@ -19,7 +18,7 @@ namespace Octonauts.Environment
             return GetHelpText<Commands>(indent);
         }
 
-        protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
+        protected override Dictionary<string, ICommandHandler> Dispatcher => new()
         {
             {
                 Commands.DeleteCmd.GetDescription().CommandName, new DeleteEnvironmentsCmdHandler()

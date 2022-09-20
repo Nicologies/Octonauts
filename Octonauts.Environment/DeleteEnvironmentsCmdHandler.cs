@@ -14,19 +14,17 @@ namespace Octonauts.Environment
     {
         protected override async Task Execute(EnvironmentDeletionParams options)
         {
-            using (var client = await OctopusClientProvider.GetOctopusClient(options))
+            using var client = await OctopusClientProvider.GetOctopusClient(options);
+            var environments = await client.Repository.Environments.FindMany(e =>
+                Regex.IsMatch(e.Name, options.EnvironmentNameRegex, RegexOptions.IgnoreCase));
+            var lifeCycles = await client.Repository.Lifecycles.FindAll();
+
+            await RemoveEnvFromLifeCycles(lifeCycles, environments, client, options.DryRun);
+
+            // ReSharper disable once AccessToDisposedClosure
+            foreach (var env in environments)
             {
-                var environments = await client.Repository.Environments.FindMany(e =>
-                    Regex.IsMatch(e.Name, options.EnvironmentNameRegex, RegexOptions.IgnoreCase));
-                var lifeCycles = await client.Repository.Lifecycles.FindAll();
-
-                await RemoveEnvFromLifecycles(lifeCycles, environments, client, options.DryRun);
-
-                // ReSharper disable once AccessToDisposedClosure
-                foreach (var env in environments)
-                {
-                    await DeleteEnvironment(client, env, options.DryRun).ConfigureAwait(false);
-                }
+                await DeleteEnvironment(client, env, options.DryRun).ConfigureAwait(false);
             }
         }
 
@@ -45,7 +43,7 @@ namespace Octonauts.Environment
                     }
                     else
                     {
-                        Console.Error.WriteLine($"Unable to delete {env.Name}, since it has machine and the machine has only this environment assgined.");
+                        await Console.Error.WriteLineAsync($"Unable to delete {env.Name}, since it has machine and the machine has only this environment assigned.");
                         return;
                     }
                 }
@@ -54,7 +52,7 @@ namespace Octonauts.Environment
             }
         }
 
-        private static async Task RemoveEnvFromLifecycles(IReadOnlyCollection<LifecycleResource> lifeCycles,
+        private static async Task RemoveEnvFromLifeCycles(IReadOnlyCollection<LifecycleResource> lifeCycles,
             IEnumerable<EnvironmentResource> environments, IOctopusAsyncClient client, bool dryRun)
         {
             foreach (var env in environments)

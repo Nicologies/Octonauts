@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using coreArgs.Attributes;
 using Octonauts.Core.CommandsFramework;
 
 namespace Octonauts.Machines
@@ -25,7 +24,7 @@ namespace Octonauts.Machines
             return GetHelpText<Commands>(indent);
         }
 
-        protected override Dictionary<string, ICommandHandler> Dispatcher => new Dictionary<string, ICommandHandler>
+        protected override Dictionary<string, ICommandHandler> Dispatcher => new()
         {
             {
                 Commands.DeployProject.GetDescription().CommandName, new DeployProjectToMachinesCmdHandler()

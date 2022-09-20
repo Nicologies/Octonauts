@@ -12,13 +12,13 @@ namespace Octonauts.Core.CommandsFramework
             options.FillOctopusParams();
             if (string.IsNullOrWhiteSpace(options.ApiKey))
             {
-                Console.Error.WriteLine("Octopus Api Key is required, you can provide it via command line: --api-key API-XXXXX or environment variable: OCTOPUS_APIKEY");
+                await Console.Error.WriteLineAsync("Octopus Api Key is required, you can provide it via command line: --api-key API-XXXXX or environment variable: OCTOPUS_APIKEY");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(options.ServerUrl))
             {
-                Console.Error.WriteLine("Octopus server URL is required, you can provide it via command line: --server-url http://xxx.com or environment variable: OCTOPUS_SERVERURL");
+                await Console.Error.WriteLineAsync("Octopus server URL is required, you can provide it via command line: --server-url http://xxx.com or environment variable: OCTOPUS_SERVERURL");
                 return;
             }
 

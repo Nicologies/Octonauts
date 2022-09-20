@@ -2,7 +2,6 @@
   <Import Project="../Version.targets" />
   <Import Project="../SetNuspecProperties.targets" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Octonauts.Machines</AssemblyName>
     <RootNamespace>Octonauts.Machines</RootNamespace>
     <NuspecFile>../template.nuspec</NuspecFile>
@@ -14,7 +13,6 @@
     <PackageProjectUrl>https://github.com/Nicologies/octonauts</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Nicologies/octonauts</RepositoryUrl>
     <PackageTags>OctopusDeploy</PackageTags>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="nuget_packages\**" />
